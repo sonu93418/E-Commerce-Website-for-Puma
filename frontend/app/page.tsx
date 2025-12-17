@@ -2,9 +2,9 @@
 
 import { useEffect } from 'react';
 import Hero from '@/components/home/Hero';
+import PromoPoster from '@/components/home/PromoPoster';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
 import CategoryShowcase from '@/components/home/CategoryShowcase';
-import BrandStory from '@/components/home/BrandStory';
 import { useThemeStore } from '@/store/themeStore';
 
 export default function Home() {
@@ -22,9 +22,9 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       <Hero />
+      <PromoPoster />
       <FeaturedProducts />
       <CategoryShowcase />
-      <BrandStory />
     </div>
   );
 }

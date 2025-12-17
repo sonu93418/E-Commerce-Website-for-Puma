@@ -1,172 +1,225 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import gsap from 'gsap';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end start'],
-  });
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const slides = [
+    {
+      id: 1,
+      title: 'RUNNING SHOES',
+      subtitle: 'Speed Meets Style',
+      description: 'Engineered for performance, designed for champions',
+      image: 'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/376812/01/sv01/fnd/IND/fmt/png/Velocity-NITRO-2-Men%E2%80%99s-Running-Shoes',
+      category: 'Shoes',
+      gradient: 'from-blue-900 via-black to-purple-900',
+    },
+    {
+      id: 2,
+      title: 'FOOTBALL COLLECTION',
+      subtitle: 'Dominate The Field',
+      description: 'Professional gear for the modern athlete',
+      image: 'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/106559/01/sv01/fnd/IND/fmt/png/FUTURE-Z-1.3-FG/AG-Men%E2%80%99s-Football-Boots',
+      category: 'Sports',
+      gradient: 'from-green-900 via-black to-emerald-900',
+    },
+    {
+      id: 3,
+      title: 'LIFESTYLE APPAREL',
+      subtitle: 'Street Meets Sport',
+      description: 'Premium clothing for everyday excellence',
+      image: 'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/586667/01/mod01/fnd/IND/fmt/png/Essentials-Logo-Men%E2%80%99s-Tee',
+      category: 'Apparel',
+      gradient: 'from-red-900 via-black to-orange-900',
+    },
+    {
+      id: 4,
+      title: 'CLASSIC SNEAKERS',
+      subtitle: 'Timeless Heritage',
+      description: 'Iconic designs reimagined for today',
+      image: 'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/374915/01/sv01/fnd/IND/fmt/png/Suede-Classic-XXI-Unisex-Sneakers',
+      category: 'Shoes',
+      gradient: 'from-gray-900 via-black to-slate-900',
+    },
+    {
+      id: 5,
+      title: 'SPORTS ACCESSORIES',
+      subtitle: 'Complete Your Game',
+      description: 'Essential gear for peak performance',
+      image: 'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/078834/01/fnd/IND/fmt/png/Evercat-Contender-Unisex-Backpack',
+      category: 'Accessories',
+      gradient: 'from-indigo-900 via-black to-violet-900',
+    },
+  ];
 
   useEffect(() => {
-    const tl = gsap.timeline();
-    
-    tl.from('.hero-title', {
-      y: 100,
-      opacity: 0,
-      duration: 1,
-      ease: 'power4.out',
-    })
-    .from('.hero-subtitle', {
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out',
-    }, '-=0.5')
-    .from('.hero-cta', {
-      scale: 0.8,
-      opacity: 0,
-      duration: 0.6,
-      ease: 'back.out(1.7)',
-    }, '-=0.3');
-  }, []);
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
 
   return (
-    <div ref={containerRef} className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
-      <motion.div 
-        style={{ y, opacity }}
-        className="absolute inset-0 z-0"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-red-900 dark:from-black dark:via-black dark:to-red-950" />
-        
-        {/* Animated Grid */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'linear-gradient(to right, rgba(255,0,0,0.1) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,0,0,0.1) 1px, transparent 1px)',
-            backgroundSize: '80px 80px',
-          }} />
-        </div>
-
-        {/* Floating Shapes */}
+    <div className="relative h-screen overflow-hidden bg-black pt-16 md:pt-20">
+      <AnimatePresence mode="wait">
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className="absolute top-20 right-20 w-64 h-64 bg-puma-red opacity-10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.5, 1],
-            rotate: [0, -90, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className="absolute bottom-20 left-20 w-96 h-96 bg-white opacity-5 rounded-full blur-3xl"
-        />
-      </motion.div>
-
-      {/* Hero Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="space-y-8"
+          key={currentSlide}
+          initial={{ x: '100%' }}
+          animate={{ x: 0 }}
+          exit={{ x: '-100%' }}
+          transition={{ duration: 0.8, ease: [0.645, 0.045, 0.355, 1] }}
+          className={`absolute inset-0 pt-16 md:pt-20 bg-gradient-to-br ${slides[currentSlide].gradient}`}
         >
-          {/* Small Badge */}
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
-            className="inline-block"
+          {/* Content Container */}
+          <div className="relative h-full container mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8 flex items-center">
+            <div className="grid lg:grid-cols-2 gap-4 md:gap-8 items-center w-full max-h-full">
+              {/* Left Content */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="text-white space-y-4 md:space-y-6 z-10"
+              >
+                {/* Badge */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
+                  className="inline-block"
+                >
+                  <img
+                    src="https://logos-world.net/wp-content/uploads/2020/04/Puma-Logo.png"
+                    alt="PUMA Logo"
+                    className="h-12 md:h-16 w-auto"
+                  />
+                </motion.div>
+
+                {/* Category */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="text-xs md:text-sm text-gray-400 tracking-widest uppercase"
+                >
+                  {slides[currentSlide].subtitle}
+                </motion.div>
+
+                {/* Title */}
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-black leading-tight"
+                >
+                  {slides[currentSlide].title}
+                </motion.h1>
+
+                {/* Description */}
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.7 }}
+                  className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300"
+                >
+                  {slides[currentSlide].description}
+                </motion.p>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 pt-2 md:pt-4"
+                >
+                  <Link href={`/products?category=${slides[currentSlide].category}`}>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full sm:w-auto px-6 py-3 md:px-10 md:py-4 bg-puma-red text-white text-sm sm:text-base md:text-lg font-bold rounded-full shadow-2xl hover:bg-red-600 transition-all"
+                    >
+                      Shop Now
+                    </motion.button>
+                  </Link>
+                  <Link href="/products">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full sm:w-auto px-6 py-3 md:px-10 md:py-4 bg-white/10 backdrop-blur-sm border-2 border-white text-white text-sm sm:text-base md:text-lg font-bold rounded-full hover:bg-white/20 transition-all"
+                    >
+                      View All
+                    </motion.button>
+                  </Link>
+                </motion.div>
+              </motion.div>
+
+              {/* Right Content - Product Image */}
+              <motion.div
+                initial={{ opacity: 0, x: 50, scale: 0.8 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="relative h-[300px] md:h-[400px] lg:h-[500px] flex items-center justify-center"
+              >
+                <motion.img
+                  src={slides[currentSlide].image}
+                  alt={slides[currentSlide].title}
+                  className="max-w-full max-h-full object-contain drop-shadow-2xl"
+                  animate={{
+                    y: [0, -20, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Slide Indicators */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === currentSlide ? 'w-12 bg-puma-red' : 'w-2 bg-white/50'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all"
           >
-            <div className="glass px-6 py-2 rounded-full text-sm font-semibold text-white border border-white/20">
-              NEW COLLECTION 2025
-            </div>
-          </motion.div>
-
-          {/* Main Title */}
-          <h1 className="hero-title text-6xl md:text-8xl lg:text-9xl font-heading font-bold text-white leading-none">
-            FOREVER
-            <span className="block text-gradient mt-2">FASTER</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="hero-subtitle text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto">
-            Unleash your potential with premium sportswear designed for champions
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
-            <Link href="/products">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-puma-red text-white text-lg font-semibold rounded-lg hover:shadow-glow transition-all"
-              >
-                Shop Now
-              </motion.button>
-            </Link>
-            <Link href="/products?category=Shoes">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-transparent border-2 border-white text-white text-lg font-semibold rounded-lg hover:bg-white hover:text-black transition-all"
-              >
-                Explore Collection
-              </motion.button>
-            </Link>
-          </div>
-
-          {/* Stats */}
-          <div className="flex flex-wrap items-center justify-center gap-12 mt-16 text-white">
-            <div>
-              <div className="text-4xl font-bold text-gradient">10K+</div>
-              <div className="text-sm text-gray-400 mt-1">Products</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-gradient">500K+</div>
-              <div className="text-sm text-gray-400 mt-1">Customers</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold text-gradient">4.8★</div>
-              <div className="text-sm text-gray-400 mt-1">Rating</div>
-            </div>
-          </div>
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition-all"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </motion.div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
-      >
-        <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-white rounded-full"
-          />
-        </div>
-      </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

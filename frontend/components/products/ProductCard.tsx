@@ -71,12 +71,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
       >
         {/* Image Container */}
-        <div className="relative aspect-square overflow-hidden bg-gray-100 dark:bg-gray-700">
-          <Image
+        <div className="relative aspect-square overflow-hidden bg-white dark:bg-gray-700">
+          <img
             src={product.images[0]?.url || '/placeholder.jpg'}
             alt={product.images[0]?.alt || product.name}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 p-4"
           />
 
           {/* Discount Badge */}
