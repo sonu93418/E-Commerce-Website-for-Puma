@@ -1,32 +1,102 @@
 # 🐆 PUMA E-Commerce Platform
 
-A modern, high-performance e-commerce web application for PUMA sportswear, footwear, and lifestyle products. Built with React, Next.js, Node.js, and MongoDB.
+A modern, full-stack e-commerce web application for PUMA sportswear, footwear, and lifestyle products. Built with Next.js, TypeScript, Node.js, Express, and MongoDB.
 
 ![PUMA Logo](https://img.shields.io/badge/PUMA-Forever%20Faster-FF0000?style=for-the-badge&logo=puma&logoColor=white)
+
+## 🚀 Quick Start
+
+### Local Development
+
+**1. Start MongoDB**
+```bash
+net start MongoDB
+```
+
+**2. Backend Setup**
+```bash
+cd backend
+npm install
+node seed.js      # Load sample data
+npm run dev
+```
+
+**3. Frontend Setup** (new terminal)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Visit: http://localhost:3000
+
+---
+
+## 🌐 Deploy to Production
+
+### **Option 1: Vercel (Frontend) + Render (Backend)** ⭐ RECOMMENDED
+
+#### Step 1: Deploy Backend to Render
+1. Go to https://render.com and sign in with GitHub
+2. Click **New +** → **Web Service**
+3. Connect repo: `sonu93418/E-Commerce-Website-for-Puma`
+4. Settings:
+   - **Name:** `puma-backend`
+   - **Root Directory:** `backend`
+   - **Environment:** Node
+   - **Build Command:** `npm install`
+   - **Start Command:** `npm start`
+5. Add Environment Variables:
+   ```
+   MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/puma
+   JWT_SECRET=your_random_secret_key_here
+   PORT=5000
+   NODE_ENV=production
+   FRONTEND_URL=https://your-app.vercel.app
+   ```
+6. Deploy and copy backend URL (e.g., `https://puma-backend.onrender.com`)
+
+#### Step 2: Deploy Frontend to Vercel
+1. Go to https://vercel.com and sign in with GitHub
+2. Click **New Project** → Import your repository
+3. Configure:
+   - **Root Directory:** `frontend`
+   - **Framework Preset:** Next.js
+4. Add Environment Variables:
+   ```
+   NEXT_PUBLIC_API_URL=https://puma-backend.onrender.com/api
+   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+   ```
+5. Deploy!
+
+**📖 Detailed guides:** See [DEPLOYMENT-GUIDE.md](DEPLOYMENT-GUIDE.md)
+
+---
 
 ## ✨ Features
 
 ### 🎨 Design & UI
-- **Dark/Light Theme Toggle** - Seamless theme switching with Puma brand colors
-- **Glassmorphism Cards** - Modern, premium UI with backdrop blur effects
-- **Fully Responsive** - Optimized for mobile, tablet, and desktop
-- **Smooth Animations** - Framer Motion & GSAP animations throughout
+- Dark/Light theme toggle with Puma brand colors
+- Glassmorphism cards & modern UI effects
+- Fully responsive design
+- Smooth animations (Framer Motion + GSAP)
 
-### 🧩 Core Functionality
-- **Hero Section** - Immersive full-screen banner with animated elements
-- **Product Catalog** - Advanced filtering by category, price, color, and size
-- **Product Details** - 360° view capability, zoom-on-hover, size guide, reviews
-- **Shopping Cart** - Real-time updates with smooth animations
-- **Secure Checkout** - Multi-step checkout with Stripe payment integration
-- **User Dashboard** - Order history, wishlist, address management
-- **Authentication** - JWT-based secure authentication system
+### 🛍️ E-Commerce Functionality
+- Product catalog with advanced filtering
+- Shopping cart with real-time updates
+- User authentication (JWT)
+- Secure checkout with Stripe integration
+- Order tracking & history
+- Wishlist management
+- Product reviews
 
 ### ⚡ Technical Features
-- **Fast Loading** - Optimized images with Next.js Image component
-- **SEO Optimized** - Server-side rendering with Next.js
-- **PWA Support** - Progressive Web App capabilities
-- **Accessible** - ARIA labels and keyboard navigation
-- **Real-time Updates** - Live stock status and cart synchronization
+- Next.js 14 with App Router
+- Server-side rendering (SSR)
+- Optimized images & fast loading
+- TypeScript for type safety
+- RESTful API with Express.js
+- MongoDB database
 
 ## 🛠 Tech Stack
 
@@ -37,9 +107,6 @@ A modern, high-performance e-commerce web application for PUMA sportswear, footw
 - **Animations:** Framer Motion + GSAP
 - **State Management:** Zustand
 - **HTTP Client:** Axios
-- **Icons:** React Icons
-- **Forms:** React Hook Form
-- **Notifications:** React Hot Toast
 
 ### Backend
 - **Runtime:** Node.js
@@ -47,9 +114,7 @@ A modern, high-performance e-commerce web application for PUMA sportswear, footw
 - **Database:** MongoDB with Mongoose
 - **Authentication:** JWT (JSON Web Tokens)
 - **Password Hashing:** bcryptjs
-- **Payment Processing:** Stripe
-- **File Upload:** Multer + Cloudinary
-- **Email:** Nodemailer
+- **Payments:** Stripe
 
 ## 📁 Project Structure
 
@@ -102,73 +167,14 @@ E-Commerce/
     └── package.json
 ```
 
-## 🚀 Getting Started
+## 🧪 Test Credentials
 
-### Prerequisites
-- Node.js 18+ installed
-- MongoDB installed and running
-- npm or yarn package manager
+After running `node seed.js`, use these accounts:
 
-### Backend Setup
-
-1. **Navigate to backend directory:**
-   ```bash
-   cd backend
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables:**
-   - Copy `.env.example` to `.env`
-   - Update the values:
-   ```env
-   PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/puma-ecommerce
-   JWT_SECRET=your_secret_key
-   STRIPE_SECRET_KEY=your_stripe_key
-   ```
-
-4. **Seed the database:**
-   ```bash
-   npm run seed
-   ```
-   This creates sample products and test users:
-   - Admin: `admin@puma.com` / `admin123`
-   - User: `test@example.com` / `test123`
-
-5. **Start the server:**
-   ```bash
-   npm run dev
-   ```
-   Server runs on `http://localhost:5000`
-
-### Frontend Setup
-
-1. **Navigate to frontend directory:**
-   ```bash
-   cd frontend
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables:**
-   Create `.env.local` file:
-   ```env
-   NEXT_PUBLIC_API_URL=http://localhost:5000/api
-   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
-   ```
-
-4. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-   Application runs on `http://localhost:3000`
+| Email | Password | Role |
+|-------|----------|------|
+| admin@puma.com | admin123 | Admin |
+| test@example.com | test123 | User |
 
 ## 📝 API Endpoints
 
