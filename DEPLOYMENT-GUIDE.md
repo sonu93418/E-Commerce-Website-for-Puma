@@ -42,8 +42,9 @@
 1. Go to https://vercel.com → Sign in with GitHub
 2. **New Project** → Import repository
 3. **IMPORTANT Configuration:**
-   - **Root Directory:** `frontend` ⚠️
-   - **Framework:** Next.js
+   - **Root Directory:** `frontend` ⚠️ **CRITICAL!**
+   - **Framework Preset:** Next.js (auto-detected)
+   - Leave build settings as default
 4. Add **Environment Variables**:
    ```
    NEXT_PUBLIC_API_URL=https://puma-backend.onrender.com/api
@@ -51,6 +52,8 @@
    ```
 5. **Deploy** → Wait 3-5 minutes
 6. Your app is live! 🎉
+
+**Note:** The `vercel.json` file in root is minimal and only handles URL rewrites. Vercel will auto-detect Next.js from the `frontend` folder.
 
 ---
 
