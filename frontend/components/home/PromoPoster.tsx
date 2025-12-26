@@ -67,6 +67,7 @@ export default function PromoPoster() {
                 ON ALL PUMA PRODUCTS
               </p>
             </motion.div>
+            
 
             {/* Product Categories Grid */}
             <motion.div
@@ -92,6 +93,7 @@ export default function PromoPoster() {
                 </motion.div>
               ))}
             </motion.div>
+           
 
             {/* CTA Buttons */}
             <motion.div
@@ -122,6 +124,7 @@ export default function PromoPoster() {
                 </motion.button>
               </Link>
             </motion.div>
+            //  the proper formatting the error was causing 
 
             {/* Additional Info */}
             <motion.div

@@ -68,7 +68,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <motion.div
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
-        className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+        className="group relative bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
       >
         {/* Image Container */}
         <div className="relative aspect-square overflow-hidden bg-white dark:bg-gray-700">
@@ -78,12 +78,24 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 p-4"
           />
 
-          {/* Discount Badge */}
-          {discount > 0 && (
-            <div className="absolute top-4 left-4 bg-puma-red text-white px-3 py-1 rounded-full text-sm font-semibold">
-              -{discount}%
-            </div>
-          )}
+          {/* Badges */}
+          <div className="absolute top-4 left-4 flex flex-col gap-2">
+            {discount > 0 && (
+              <div className="bg-puma-red text-white px-3 py-1 rounded-full text-sm font-semibold">
+                -{discount}%
+              </div>
+            )}
+            {(product as any).isNewArrival && (
+              <div className="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                NEW
+              </div>
+            )}
+            {(product as any).isBestseller && (
+              <div className="bg-yellow-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                BESTSELLER
+              </div>
+            )}
+          </div>
 
           {/* Wishlist Button */}
           <motion.button
@@ -115,29 +127,57 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
 
         {/* Product Info */}
-        <div className="p-4">
-          {/* Category */}
-          <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
-            {product.category}
+        <div className="p-4 flex-1 flex flex-col">
+          {/* Category & Stock */}
+          <div className="flex items-center justify-between mb-1">
+            <div className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold">
+              {product.category}
+            </div>
+            {(product as any).totalStock && (product as any).totalStock < 10 && (
+              <div className="text-xs text-red-600 font-semibold">
+                Only {(product as any).totalStock} left
+              </div>
+            )}
           </div>
 
           {/* Name */}
-          <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-puma-red transition-colors">
+          <h3 className="font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-puma-red transition-colors min-h-[3rem]">
             {product.name}
           </h3>
 
+          {/* Colors Available */}
+          {(product as any).colors && (product as any).colors.length > 0 && (
+            <div className="flex items-center gap-1 mb-2">
+              {(product as any).colors.slice(0, 4).map((color: any, index: number) => (
+                <div
+                  key={index}
+                  className="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600"
+                  style={{ backgroundColor: color.hex }}
+                  title={color.name}
+                />
+              ))}
+              {(product as any).colors.length > 4 && (
+                <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
+                  +{(product as any).colors.length - 4}
+                </span>
+              )}
+            </div>
+          )}
+
           {/* Rating */}
-          <div className="flex items-center gap-1 mb-2">
+          <div className="flex items-center gap-1 mb-3">
             <div className="flex items-center">
               {[...Array(5)].map((_, i) => (
-                <FiStar
+                <span
                   key={i}
-                  className={`w-4 h-4 ${
+                  className={`text-base ${
                     i < Math.round(product.rating.average)
-                      ? 'text-yellow-400 fill-current'
-                      : 'text-gray-300'
+                      ? 'text-yellow-400'
+                      : 'text-gray-300 dark:text-gray-600'
                   }`}
-                />
+                >
+                  ★
+                </span>
               ))}
             </div>
             <span className="text-sm text-gray-600 dark:text-gray-400">
@@ -145,15 +185,31 @@ export default function ProductCard({ product }: ProductCardProps) {
             </span>
           </div>
 
-          {/* Price */}
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-gray-900 dark:text-white">
-              {formatPrice(product.price)}
-            </span>
-            {product.originalPrice && (
-              <span className="text-sm text-gray-500 line-through">
-                {formatPrice(product.originalPrice)}
+          {/* Price - Push to bottom */}
+          <div className="mt-auto">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xl font-bold text-gray-900 dark:text-white">
+                ${product.price}
               </span>
+              {product.originalPrice && (
+                <span className="text-sm text-gray-500 line-through">
+                  ${product.originalPrice}
+                </span>
+              )}
+            </div>
+
+            {/* Features Tags */}
+            {(product as any).tags && (product as any).tags.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {(product as any).tags.slice(0, 2).map((tag: string, index: number) => (
+                  <span
+                    key={index}
+                    className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 text-xs rounded"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
             )}
           </div>
         </div>

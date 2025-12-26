@@ -35,3 +35,4 @@ export const useThemeStore = create<ThemeState>()(
     }
   )
 );
+//the store manges the theme state (dark or light ) and presists the preference in local strogae 

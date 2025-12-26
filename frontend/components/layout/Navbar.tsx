@@ -45,7 +45,7 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/products?gender=Men', label: 'Men' },
+    { href: '/men', label: 'Men' },
     { href: '/products?gender=Women', label: 'Women' },
     { href: '/products?category=Sports', label: 'Sports' },
     { href: '/products?gender=Kids', label: 'Kids' },

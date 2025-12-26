@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FUNCTIONS_CONFIG_MANIFEST } from 'next/dist/shared/lib/constants';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);

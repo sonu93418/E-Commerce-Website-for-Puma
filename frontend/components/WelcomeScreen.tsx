@@ -29,10 +29,10 @@ export default function WelcomeScreen() {
       );
     }
 
-    // Hide welcome screen after 3 seconds
+    // Hide welcome screen after 1 second
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -44,10 +44,10 @@ export default function WelcomeScreen() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black overflow-hidden"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-transparent overflow-hidden"
         >
           {/* Alternating Black and White Stripes */}
-          <div className="absolute inset-0">
+          <div className="absolute left-0 right-0 top-[15%] bottom-[15%]">
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
