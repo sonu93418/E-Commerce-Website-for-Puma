@@ -5,7 +5,9 @@ import { motion } from 'framer-motion';
 import ProductCard from '@/components/products/ProductCard';
 import api from '@/lib/api';
 import Link from 'next/link';
-import { FiChevronRight, FiTruck, FiStar, FiPackage, FiTrendingUp, FiDollarSign } from 'react-icons/fi';
+import { FiChevronRight, FiTruck, FiStar, FiPackage, FiTrendingUp, FiAward, FiTarget, FiZap, FiActivity, FiDisc } from 'react-icons/fi';
+import { IoFootballOutline, IoBasketballOutline } from 'react-icons/io5';
+import { GiSoccerBall, GiBasketballBall, GiRunningShoe, GiWeightLiftingUp, GiRaceCar } from 'react-icons/gi';
 
 interface Product {
   _id: string;
@@ -20,12 +22,13 @@ interface Product {
   images: { url: string; alt: string }[];
   colors: { name: string; hex: string; images: string[] }[];
   rating: { average: number; count: number };
+  tags?: string[];
   isFeatured?: boolean;
   isNewArrival?: boolean;
   isBestseller?: boolean;
 }
 
-export default function MenPage() {
+export default function SportsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -33,7 +36,7 @@ export default function MenPage() {
 
   useEffect(() => {
     fetchProducts();
-    // Hide footer on men's page
+    // Hide footer on sports page
     const footer = document.querySelector('footer');
     if (footer) {
       footer.style.display = 'none';
@@ -51,30 +54,29 @@ export default function MenPage() {
     try {
       setLoading(true);
       const response = await api.get('/products');
-      // Filter for men's products and unisex items
-      const menProducts = response.data.filter(
+      // Filter for sports products
+      const sportsProducts = response.data.filter(
         (product: Product) => 
-          product.gender === 'Men' || 
-          product.gender === 'Unisex' || 
-          product.gender === 'men' || 
-          product.gender === 'unisex'
+          product.category === 'Sports' || 
+          product.subCategory?.toLowerCase().includes('sport') ||
+          product.tags?.some((tag: string) => ['sports', 'football', 'basketball', 'running', 'training', 'gym'].includes(tag.toLowerCase()))
       );
-      setProducts(menProducts);
-      console.log(`Loaded ${menProducts.length} men's products`, menProducts);
+      setProducts(sportsProducts);
+      console.log(`Loaded ${sportsProducts.length} sports products`, sportsProducts);
     } catch (error) {
       console.error('Error fetching products:', error);
-      console.log('Failed to fetch from API, check if backend is running on http://localhost:5000');
     } finally {
       setLoading(false);
     }
   };
 
-  const categories = ['All', 'Shoes', 'Apparel', 'Accessories', 'Sports'];
+  const categories = ['All', 'Football', 'Basketball', 'Running', 'Training', 'Motorsport'];
 
   const filteredProducts = products
     .filter((product) => {
-      const categoryMatch = selectedCategory === 'All' || product.category === selectedCategory;
-      return categoryMatch;
+      if (selectedCategory === 'All') return true;
+      return product.subCategory === selectedCategory || 
+             product.tags?.includes(selectedCategory.toLowerCase());
     })
     .sort((a, b) => {
       switch (sortBy) {
@@ -93,37 +95,50 @@ export default function MenPage() {
 
   const featuredCollections = [
     {
+      title: 'Football',
+      description: 'Dominate the pitch',
+      image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800',
+      category: 'Football',
+      icon: GiSoccerBall
+    },
+    {
+      title: 'Basketball',
+      description: 'Elevate your game',
+      image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=800',
+      category: 'Basketball',
+      icon: GiBasketballBall
+    },
+    {
       title: 'Running',
-      description: 'Performance shoes & apparel',
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800',
-      category: 'Shoes',
+      description: 'Run faster, run longer',
+      image: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800',
+      category: 'Running',
+      icon: GiRunningShoe
     },
     {
       title: 'Training',
-      description: 'Gym-ready gear',
-      image: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800',
-      category: 'Apparel',
+      description: 'Push your limits',
+      image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800',
+      category: 'Training',
+      icon: GiWeightLiftingUp
     },
     {
-      title: 'Lifestyle',
-      description: 'Casual streetwear',
-      image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800',
-      category: 'Accessories',
-    },
-    {
-      title: 'Football',
-      description: 'Match day essentials',
-      image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800',
-      category: 'Sports',
+      title: 'Motorsport',
+      description: 'Speed & style',
+      image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800',
+      category: 'Motorsport',
+      icon: GiRaceCar
     },
   ];
 
-  // Group products by category for better organization
+  // Group products by category
   const productsByCategory = categories.reduce((acc, category) => {
     if (category === 'All') {
       acc[category] = filteredProducts;
     } else {
-      acc[category] = products.filter(p => p.category === category);
+      acc[category] = products.filter(p => 
+        p.subCategory === category || p.tags?.includes(category.toLowerCase())
+      );
     }
     return acc;
   }, {} as Record<string, Product[]>);
@@ -131,23 +146,23 @@ export default function MenPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
       {/* Hero Banner */}
-      <section className="relative bg-black overflow-hidden">
+      <section className="relative bg-gradient-to-r from-black via-red-900 to-black overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1605408499391-6368c628ef42?w=1600"
-            alt="Men's Collection"
-            className="w-full h-full object-cover opacity-40"
+            src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=1600"
+            alt="Sports Collection"
+            className="w-full h-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
         </div>
         
         <div className="relative container mx-auto px-4 py-20 lg:py-32">
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             {/* Breadcrumb */}
             <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
               <Link href="/" className="hover:text-white transition-colors">Home</Link>
               <FiChevronRight className="w-4 h-4" />
-              <span className="text-white font-medium">Men</span>
+              <span className="text-white font-medium">Sports</span>
             </nav>
 
             <motion.div
@@ -155,20 +170,27 @@ export default function MenPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-6xl md:text-8xl font-black text-white mb-6 leading-tight">
-                MEN'S<br />COLLECTION
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-xl">
-                Elevate your game with premium sportswear engineered for peak performance and style
+              <div className="flex items-center gap-4 mb-6">
+                <FiAward className="w-16 h-16 text-puma-red" />
+                <h1 className="text-6xl md:text-8xl font-black text-white leading-tight">
+                  SPORTS<br />PERFORMANCE
+                </h1>
+              </div>
+              <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl">
+                Engineered for champions. Premium sports gear designed to maximize your performance across every discipline.
               </p>
               <div className="flex flex-wrap gap-4">
                 <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20 flex items-center gap-2">
-                  <FiPackage className="w-5 h-5 text-white" />
-                  <span className="text-white font-semibold">New Arrivals</span>
+                  <FiTarget className="w-5 h-5 text-white" />
+                  <span className="text-white font-semibold">Pro Performance</span>
                 </div>
                 <div className="bg-puma-red px-6 py-3 rounded-full flex items-center gap-2">
-                  <FiTruck className="w-5 h-5 text-white" />
-                  <span className="text-white font-semibold">Free Shipping</span>
+                  <FiZap className="w-5 h-5 text-white" />
+                  <span className="text-white font-semibold">Latest Technology</span>
+                </div>
+                <div className="bg-yellow-500 px-6 py-3 rounded-full flex items-center gap-2">
+                  <FiAward className="w-5 h-5 text-black" />
+                  <span className="text-black font-semibold">Championship Grade</span>
                 </div>
               </div>
             </motion.div>
@@ -176,7 +198,7 @@ export default function MenPage() {
         </div>
       </section>
 
-      {/* Featured Collections */}
+      {/* Featured Sports Categories */}
       <section className="container mx-auto px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -185,14 +207,14 @@ export default function MenPage() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-4">
-            Shop by Category
+            Shop by Sport
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400">
-            Discover our curated collections designed for champions
+            Find the perfect gear for your passion
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
           {featuredCollections.map((collection, index) => (
             <motion.button
               key={collection.title}
@@ -201,15 +223,16 @@ export default function MenPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative h-80 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all"
+              className="group relative h-96 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all"
             >
               <img
                 src={collection.image}
                 alt={collection.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-left">
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
+                <collection.icon className="w-16 h-16 text-white mb-4" />
                 <h3 className="text-3xl font-black text-white mb-2">
                   {collection.title}
                 </h3>
@@ -225,11 +248,11 @@ export default function MenPage() {
 
       {/* Category Filter Bar */}
       <div className="container mx-auto px-4 py-8">
-        <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg">
+        <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg border-2 border-puma-red/20">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div>
               <h3 className="text-2xl font-black text-gray-900 dark:text-white mb-2">
-                {selectedCategory === 'All' ? 'All Products' : selectedCategory}
+                {selectedCategory === 'All' ? 'All Sports Gear' : selectedCategory}
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
                 {filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'} Available
@@ -245,7 +268,7 @@ export default function MenPage() {
                     onClick={() => setSelectedCategory(category)}
                     className={`px-6 py-2.5 rounded-full font-semibold transition-all ${
                       selectedCategory === category
-                        ? 'bg-black dark:bg-white text-white dark:text-black shadow-lg scale-105'
+                        ? 'bg-puma-red text-white shadow-lg scale-105'
                         : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
                     }`}
                   >
@@ -258,7 +281,7 @@ export default function MenPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-6 py-2.5 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-full border-none focus:ring-2 focus:ring-black dark:focus:ring-white font-semibold cursor-pointer"
+                className="px-6 py-2.5 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-full border-none focus:ring-2 focus:ring-puma-red font-semibold cursor-pointer"
               >
                 <option value="featured">Featured</option>
                 <option value="newest">Newest</option>
@@ -273,20 +296,11 @@ export default function MenPage() {
 
       {/* Products Grid */}
       <section className="container mx-auto px-4 py-12 pb-20">
-        {/* Debug Info */}
-        {!loading && (
-          <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm">
-            <p className="text-gray-900 dark:text-white">
-              Total products: {products.length} | Filtered: {filteredProducts.length} | Category: {selectedCategory}
-            </p>
-          </div>
-        )}
-        
         {loading ? (
           <div className="flex flex-col justify-center items-center py-32">
             <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-puma-red"></div>
             <p className="mt-6 text-xl text-gray-600 dark:text-gray-400 font-semibold">
-              Loading awesome products...
+              Loading championship gear...
             </p>
           </div>
         ) : filteredProducts.length === 0 ? (
@@ -294,36 +308,236 @@ export default function MenPage() {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-12 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-900 dark:to-gray-800 rounded-3xl p-12"
+              className="text-center mb-12 bg-gradient-to-br from-red-50 to-gray-50 dark:from-red-950/20 dark:to-gray-800 rounded-3xl p-12 border-2 border-puma-red/30"
             >
-              <FiPackage className="w-20 h-20 mx-auto mb-6 text-puma-red" />
+              <FiAward className="w-20 h-20 mx-auto mb-6 text-puma-red" />
               <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-4">
-                No Products Found in {selectedCategory}
+                Explore Premium Sports Gear
               </h3>
               <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-                But check out these popular men's items from our collection!
+                Discover top-performance equipment from PUMA's sports collection!
               </p>
             </motion.div>
 
-            {/* Sample Products Section */}
+            {/* Sample Sports Products Section */}
             <div className="space-y-16">
-              {/* Featured Shoes */}
+              {/* Football Gear */}
               <div>
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-3">
-                      <FiTrendingUp className="w-8 h-8 text-puma-red" />
-                      Popular Men's Shoes
+                      <GiSoccerBall className="w-10 h-10 text-puma-red" />
+                      PUMA Football Collection
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      Step up your game with these bestsellers
+                      Professional football boots and gear
                     </p>
                   </div>
                   <button
-                    onClick={() => setSelectedCategory('Shoes')}
-                    className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2"
+                    onClick={() => setSelectedCategory('Football')}
+                    className="px-6 py-3 bg-puma-red text-white rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2 shadow-lg"
                   >
-                    View All Shoes
+                    View All
+                    <FiChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                  {[
+                    {
+                      image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&h=600&fit=crop',
+                      name: 'PUMA Future Ultimate FG/AG',
+                      price: '₹18,999',
+                      originalPrice: '₹22,999',
+                      discount: '17% OFF',
+                      category: 'Football Boots',
+                      rating: '4.9'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=600&h=600&fit=crop',
+                      name: 'PUMA Ultra Match FG/AG',
+                      price: '₹8,999',
+                      originalPrice: '₹11,999',
+                      discount: '25% OFF',
+                      category: 'Football Boots',
+                      rating: '4.7'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1614632537423-1e6c2e31ad0f?w=600&h=600&fit=crop',
+                      name: 'PUMA King Platinum FG',
+                      price: '₹15,999',
+                      category: 'Football Boots',
+                      rating: '4.8'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&h=600&fit=crop',
+                      name: 'PUMA Football Training Ball',
+                      price: '₹2,499',
+                      originalPrice: '₹3,499',
+                      discount: '29% OFF',
+                      category: 'Equipment',
+                      rating: '4.6'
+                    },
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      whileHover={{ y: -8 }}
+                      className="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer border-2 border-transparent hover:border-puma-red"
+                    >
+                      <div className="relative h-64 overflow-hidden bg-gray-100 dark:bg-gray-800">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute top-4 right-4 bg-puma-red text-white px-3 py-1 rounded-full text-sm font-bold">
+                          PRO
+                        </div>
+                        {item.discount && (
+                          <div className="absolute top-4 left-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold">
+                            {item.discount}
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-6">
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.category}</p>
+                        <h4 className="text-xl font-black text-gray-900 dark:text-white mb-3">{item.name}</h4>
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-col">
+                            <span className="text-2xl font-black text-puma-red">{item.price}</span>
+                            {item.originalPrice && (
+                              <span className="text-sm text-gray-400 line-through">{item.originalPrice}</span>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <FiStar className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                            <span className="font-bold text-gray-900 dark:text-white">{item.rating}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Basketball Gear */}
+              <div>
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-3">
+                      <GiBasketballBall className="w-10 h-10 text-puma-red" />
+                      PUMA Basketball Collection
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Court-ready performance gear
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setSelectedCategory('Basketball')}
+                    className="px-6 py-3 bg-puma-red text-white rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2 shadow-lg"
+                  >
+                    View All
+                    <FiChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                  {[
+                    {
+                      image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&h=600&fit=crop',
+                      name: 'PUMA MB.03 LaMelo Ball',
+                      price: '₹13,999',
+                      originalPrice: '₹16,999',
+                      discount: '18% OFF',
+                      category: 'Basketball Shoes',
+                      rating: '4.9'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1608245449230-4ac19066d2d0?w=600&h=600&fit=crop',
+                      name: 'PUMA Clyde All-Pro',
+                      price: '₹12,499',
+                      category: 'Basketball Shoes',
+                      rating: '4.8'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1515523110800-9415d13b84a8?w=600&h=600&fit=crop',
+                      name: 'PUMA Basketball Jersey',
+                      price: '₹2,999',
+                      originalPrice: '₹3,999',
+                      discount: '25% OFF',
+                      category: 'Apparel',
+                      rating: '4.7'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1519861531473-9200262188bf?w=600&h=600&fit=crop',
+                      name: 'PUMA Basketball',
+                      price: '₹2,799',
+                      category: 'Equipment',
+                      rating: '4.8'
+                    },
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      whileHover={{ y: -8 }}
+                      className="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer border-2 border-transparent hover:border-puma-red"
+                    >
+                      <div className="relative h-64 overflow-hidden bg-gray-100 dark:bg-gray-800">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                          PRO
+                        </div>
+                        {item.discount && (
+                          <div className="absolute top-4 left-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold">
+                            {item.discount}
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-6">
+                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.category}</p>
+                        <h4 className="text-xl font-black text-gray-900 dark:text-white mb-3">{item.name}</h4>
+                        <div className="flex items-center justify-between">
+                          <div className="flex flex-col">
+                            <span className="text-2xl font-black text-puma-red">{item.price}</span>
+                            {item.originalPrice && (
+                              <span className="text-sm text-gray-400 line-through">{item.originalPrice}</span>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <FiStar className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                            <span className="font-bold text-gray-900 dark:text-white">{item.rating}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Running Gear */}
+              <div>
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-3">
+                      <GiRunningShoe className="w-10 h-10 text-puma-red" />
+                      PUMA Running Collection
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      Speed and endurance technology
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setSelectedCategory('Running')}
+                    className="px-6 py-3 bg-puma-red text-white rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2 shadow-lg"
+                  >
+                    View All
                     <FiChevronRight className="w-5 h-5" />
                   </button>
                 </div>
@@ -331,68 +545,36 @@ export default function MenPage() {
                   {[
                     {
                       image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop',
-                      name: 'PUMA RS-X³ Puzzle Men',
-                      price: '₹11,999',
-                      originalPrice: '₹14,999',
-                      discount: '20% OFF',
-                      category: 'Men\'s Sneakers',
-                      rating: '4.8'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop',
-                      name: 'PUMA Suede Classic XXI Men',
-                      price: '₹6,999',
-                      originalPrice: '₹8,999',
-                      discount: '22% OFF',
-                      category: 'Men\'s Lifestyle',
-                      rating: '4.9'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=600&h=600&fit=crop',
-                      name: 'PUMA MB.01 Basketball Men',
-                      price: '₹12,999',
-                      category: 'Men\'s Basketball',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=600&fit=crop',
-                      name: 'PUMA Velocity Nitro 2 Men',
-                      price: '₹9,999',
-                      category: 'Men\'s Running',
-                      rating: '4.6'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=600&fit=crop',
-                      name: 'PUMA Future Rider Play Men',
-                      price: '₹8,499',
-                      originalPrice: '₹9,999',
-                      discount: '15% OFF',
-                      category: 'Men\'s Lifestyle',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1605408499391-6368c628ef42?w=600&h=600&fit=crop',
-                      name: 'PUMA Clyde All-Pro Men',
-                      price: '₹13,499',
-                      category: 'Men\'s Basketball',
-                      rating: '4.8'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1512374382149-233c42b6a83b?w=600&h=600&fit=crop',
-                      name: 'PUMA Deviate Nitro 2 Men',
+                      name: 'PUMA Deviate Nitro 2',
                       price: '₹14,999',
-                      category: 'Men\'s Running',
+                      originalPrice: '₹17,999',
+                      discount: '17% OFF',
+                      category: 'Running Shoes',
                       rating: '4.9'
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&h=600&fit=crop',
-                      name: 'PUMA Slipstream Lo Men',
-                      price: '₹7,499',
-                      originalPrice: '₹9,499',
-                      discount: '21% OFF',
-                      category: 'Men\'s Sneakers',
+                      image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=600&h=600&fit=crop',
+                      name: 'PUMA Velocity Nitro 3',
+                      price: '₹10,999',
+                      category: 'Running Shoes',
+                      rating: '4.8'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=600&fit=crop',
+                      name: 'PUMA Running Shorts',
+                      price: '₹1,999',
+                      originalPrice: '₹2,799',
+                      discount: '29% OFF',
+                      category: 'Apparel',
+                      rating: '4.7'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=600&fit=crop',
+                      name: 'PUMA Running Tank',
+                      price: '₹1,499',
+                      category: 'Apparel',
                       rating: '4.6'
-                    }
+                    },
                   ].map((item, index) => (
                     <motion.div
                       key={index}
@@ -400,7 +582,7 @@ export default function MenPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: index * 0.1 }}
                       whileHover={{ y: -8 }}
-                      className="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+                      className="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer border-2 border-transparent hover:border-puma-red"
                     >
                       <div className="relative h-64 overflow-hidden bg-gray-100 dark:bg-gray-800">
                         <img
@@ -408,11 +590,11 @@ export default function MenPage() {
                           alt={item.name}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
-                        <div className="absolute top-4 right-4 bg-puma-red text-white px-3 py-1 rounded-full text-sm font-bold">
-                          New
+                        <div className="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                          SPEED
                         </div>
                         {item.discount && (
-                          <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                          <div className="absolute top-4 left-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold">
                             {item.discount}
                           </div>
                         )}
@@ -438,221 +620,60 @@ export default function MenPage() {
                 </div>
               </div>
 
-              {/* Featured Apparel */}
+              {/* Training Gear */}
               <div>
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-3">
-                      <FiPackage className="w-8 h-8 text-puma-red" />
-                      Trending Men's Apparel
+                      <GiWeightLiftingUp className="w-10 h-10 text-puma-red" />
+                      PUMA Training Collection
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      Elevate your style with premium clothing
+                      Maximum performance gear
                     </p>
                   </div>
                   <button
-                    onClick={() => setSelectedCategory('Apparel')}
-                    className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2"
+                    onClick={() => setSelectedCategory('Training')}
+                    className="px-6 py-3 bg-puma-red text-white rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2 shadow-lg"
                   >
-                    View All Apparel
+                    View All
                     <FiChevronRight className="w-5 h-5" />
                   </button>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                   {[
                     {
-                      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop',
-                      name: 'PUMA ESS Logo Tee Men',
+                      image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=600&fit=crop',
+                      name: 'PUMA Training Shoes',
+                      price: '₹7,999',
+                      originalPrice: '₹9,999',
+                      discount: '20% OFF',
+                      category: 'Training Shoes',
+                      rating: '4.8'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&h=600&fit=crop',
+                      name: 'PUMA Gym Bag',
+                      price: '₹2,999',
+                      category: 'Accessories',
+                      rating: '4.7'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?w=600&h=600&fit=crop',
+                      name: 'PUMA Training Gloves',
                       price: '₹1,299',
                       originalPrice: '₹1,799',
                       discount: '28% OFF',
-                      category: 'Men\'s T-Shirts',
-                      rating: '4.8'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop',
-                      name: 'PUMA Essentials Hoodie Men',
-                      price: '₹3,999',
-                      category: 'Men\'s Hoodies',
-                      rating: '4.6'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=600&fit=crop',
-                      name: 'PUMA Classic Track Jacket Men',
-                      price: '₹4,999',
-                      originalPrice: '₹6,499',
-                      discount: '23% OFF',
-                      category: 'Men\'s Jackets',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=600&h=600&fit=crop',
-                      name: 'PUMA Active Woven Shorts Men',
-                      price: '₹1,999',
-                      category: 'Men\'s Shorts',
-                      rating: '4.5'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=600&fit=crop',
-                      name: 'PUMA Training Tank Men',
-                      price: '₹1,499',
-                      originalPrice: '₹1,999',
-                      discount: '25% OFF',
-                      category: 'Men\'s Tanks',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1626497764746-6dc36546b388?w=600&h=600&fit=crop',
-                      name: 'PUMA Teamwear Jersey Men',
-                      price: '₹2,499',
-                      category: 'Men\'s Sportswear',
-                      rating: '4.8'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?w=600&h=600&fit=crop',
-                      name: 'PUMA Running Jacket Men',
-                      price: '₹5,499',
-                      category: 'Men\'s Outerwear',
-                      rating: '4.6'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&h=600&fit=crop',
-                      name: 'PUMA Training Joggers Men',
-                      price: '₹2,999',
-                      originalPrice: '₹3,999',
-                      discount: '25% OFF',
-                      category: 'Men\'s Pants',
-                      rating: '4.9'
-                    }
-                  ].map((item, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: index * 0.1 }}
-                      whileHover={{ y: -8 }}
-                      className="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer"
-                    >
-                      <div className="relative h-64 overflow-hidden bg-gray-100 dark:bg-gray-800">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full text-sm font-bold">
-                          Hot
-                        </div>
-                        {item.discount && (
-                          <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-                            {item.discount}
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-6">
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.category}</p>
-                        <h4 className="text-xl font-black text-gray-900 dark:text-white mb-3">{item.name}</h4>
-                        <div className="flex items-center justify-between">
-                          <div className="flex flex-col">
-                            <span className="text-2xl font-black text-puma-red">{item.price}</span>
-                            {item.originalPrice && (
-                              <span className="text-sm text-gray-400 line-through">{item.originalPrice}</span>
-                            )}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <FiStar className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                            <span className="font-bold text-gray-900 dark:text-white">{item.rating}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Featured Accessories */}
-              <div>
-                <div className="flex items-center justify-between mb-8">
-                  <div>
-                    <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-3">
-                      <FiDollarSign className="w-8 h-8 text-puma-red" />
-                      Must-Have Accessories
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      Complete your look with these essentials
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setSelectedCategory('Accessories')}
-                    className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2"
-                  >
-                    View Accessories
-                    <FiChevronRight className="w-5 h-5" />
-                  </button>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                  {[
-                    {
-                      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=600&fit=crop',
-                      name: 'PUMA Phase Backpack',
-                      price: '₹1,799',
-                      originalPrice: '₹2,499',
-                      discount: '28% OFF',
-                      category: 'Unisex Bags',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1588099768531-a72d4a198538?w=600&h=600&fit=crop',
-                      name: 'PUMA Sports Cap',
-                      price: '₹999',
-                      category: 'Unisex Headwear',
-                      rating: '4.6'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=600&h=600&fit=crop',
-                      name: 'PUMA Quarter Socks 3-Pack Men',
-                      price: '₹699',
-                      originalPrice: '₹999',
-                      discount: '30% OFF',
-                      category: 'Men\'s Socks',
-                      rating: '4.8'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=600&h=600&fit=crop',
-                      name: 'PUMA Training Gloves',
-                      price: '₹1,299',
-                      category: 'Unisex Gear',
-                      rating: '4.5'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1575149572942-1561024927da?w=600&h=600&fit=crop',
-                      name: 'PUMA Gym Duffle Bag',
-                      price: '₹2,999',
-                      category: 'Men\'s Bags',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1623874228601-f4193c7b1818?w=600&h=600&fit=crop',
-                      name: 'PUMA Sport Sunglasses',
-                      price: '₹2,499',
-                      originalPrice: '₹3,499',
-                      discount: '29% OFF',
                       category: 'Accessories',
                       rating: '4.6'
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=600&h=600&fit=crop',
-                      name: 'PUMA Water Bottle 1L',
-                      price: '₹799',
-                      category: 'Hydration',
+                      image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=600&h=600&fit=crop',
+                      name: 'PUMA Resistance Bands',
+                      price: '₹1,499',
+                      category: 'Equipment',
                       rating: '4.8'
                     },
-                    {
-                      image: 'https://images.unsplash.com/photo-1622290291468-a28f7a7e6a0e?w=600&h=600&fit=crop',
-                      name: 'PUMA Training Belt',
-                      price: '₹1,499',
-                      category: 'Men\'s Accessories',
-                      rating: '4.4'
-                    }
                   ].map((item, index) => (
                     <motion.div
                       key={index}
@@ -660,7 +681,7 @@ export default function MenPage() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: index * 0.1 }}
                       whileHover={{ y: -8 }}
-                      className="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+                      className="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer border-2 border-transparent hover:border-puma-red"
                     >
                       <div className="relative h-64 overflow-hidden bg-gray-100 dark:bg-gray-800">
                         <img
@@ -668,11 +689,11 @@ export default function MenPage() {
                           alt={item.name}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                         />
-                        <div className="absolute top-4 right-4 bg-puma-red text-white px-3 py-1 rounded-full text-sm font-bold">
-                          Sale
+                        <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                          FIT
                         </div>
                         {item.discount && (
-                          <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                          <div className="absolute top-4 left-4 bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold">
                             {item.discount}
                           </div>
                         )}
@@ -703,20 +724,21 @@ export default function MenPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-center mt-16 bg-gradient-to-r from-puma-red to-red-600 rounded-3xl p-12"
+              className="text-center mt-16 bg-gradient-to-r from-puma-red via-red-600 to-black rounded-3xl p-12"
             >
+              <FiAward className="w-16 h-16 mx-auto mb-6 text-white" />
               <h3 className="text-4xl font-black text-white mb-4">
-                Ready to Shop?
+                Unleash Your Champion
               </h3>
               <p className="text-xl text-white/90 mb-8">
-                Explore our complete men's collection and find your perfect fit
+                Explore our complete sports collection and dominate every game
               </p>
               <button
                 onClick={() => setSelectedCategory('All')}
-                className="px-12 py-5 bg-white text-puma-red rounded-full font-black text-xl hover:bg-gray-100 transition-all shadow-2xl hover:shadow-3xl transform hover:scale-105 flex items-center gap-3 mx-auto"
+                className="px-12 py-5 bg-white text-puma-red rounded-full font-black text-xl hover:bg-yellow-400 hover:text-black transition-all shadow-2xl transform hover:scale-105 flex items-center gap-3 mx-auto"
               >
-                <FiPackage className="w-6 h-6" />
-                View All Products
+                <FiTarget className="w-6 h-6" />
+                View All Sports Gear
                 <FiChevronRight className="w-6 h-6" />
               </button>
             </motion.div>
@@ -737,7 +759,7 @@ export default function MenPage() {
                   </div>
                   <button
                     onClick={() => setSelectedCategory(category)}
-                    className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2"
+                    className="px-6 py-3 bg-puma-red text-white rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2"
                   >
                     View All
                     <FiChevronRight className="w-5 h-5" />
@@ -777,7 +799,7 @@ export default function MenPage() {
         )}
       </section>
 
-      {/* Category Stats */}
+      {/* Sports Stats */}
       {selectedCategory !== 'All' && filteredProducts.length > 0 && (
         <section className="container mx-auto px-4 pb-16">
           <motion.div
@@ -786,25 +808,25 @@ export default function MenPage() {
             viewport={{ once: true }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4"
           >
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 text-center shadow-lg">
-              <FiPackage className="w-8 h-8 mx-auto mb-2 text-puma-red" />
-              <p className="text-2xl font-black text-gray-900 dark:text-white">{filteredProducts.length}</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Products</p>
+            <div className="bg-gradient-to-br from-puma-red to-red-700 rounded-xl p-6 text-center shadow-lg">
+              <FiAward className="w-8 h-8 mx-auto mb-2 text-white" />
+              <p className="text-2xl font-black text-white">{filteredProducts.length}</p>
+              <p className="text-sm text-white/80">Products</p>
             </div>
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 text-center shadow-lg">
-              <FiTruck className="w-8 h-8 mx-auto mb-2 text-puma-red" />
-              <p className="text-2xl font-black text-gray-900 dark:text-white">Free</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Shipping</p>
+            <div className="bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-xl p-6 text-center shadow-lg">
+              <FiTarget className="w-8 h-8 mx-auto mb-2 text-black" />
+              <p className="text-2xl font-black text-black">PRO</p>
+              <p className="text-sm text-black/80">Performance</p>
             </div>
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 text-center shadow-lg">
-              <FiStar className="w-8 h-8 mx-auto mb-2 text-puma-red" />
-              <p className="text-2xl font-black text-gray-900 dark:text-white">Premium</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Quality</p>
+            <div className="bg-gradient-to-br from-green-500 to-green-700 rounded-xl p-6 text-center shadow-lg">
+              <FiZap className="w-8 h-8 mx-auto mb-2 text-white" />
+              <p className="text-2xl font-black text-white">Fast</p>
+              <p className="text-sm text-white/80">Delivery</p>
             </div>
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 text-center shadow-lg">
-              <FiTrendingUp className="w-8 h-8 mx-auto mb-2 text-puma-red" />
-              <p className="text-2xl font-black text-gray-900 dark:text-white">Trending</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Styles</p>
+            <div className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl p-6 text-center shadow-lg">
+              <FiStar className="w-8 h-8 mx-auto mb-2 text-white" />
+              <p className="text-2xl font-black text-white">4.8+</p>
+              <p className="text-sm text-white/80">Rated</p>
             </div>
           </motion.div>
         </section>

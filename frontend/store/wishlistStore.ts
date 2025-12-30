@@ -7,6 +7,10 @@ interface Product {
   price: number;
   images: Array<{ url: string; alt: string }>;
   category: string;
+  rating: {
+    average: number;
+    count: number;
+  };
 }
 
 interface WishlistState {

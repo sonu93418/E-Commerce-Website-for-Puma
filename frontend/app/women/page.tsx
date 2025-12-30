@@ -25,7 +25,7 @@ interface Product {
   isBestseller?: boolean;
 }
 
-export default function MenPage() {
+export default function WomenPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -33,7 +33,7 @@ export default function MenPage() {
 
   useEffect(() => {
     fetchProducts();
-    // Hide footer on men's page
+    // Hide footer on women's page
     const footer = document.querySelector('footer');
     if (footer) {
       footer.style.display = 'none';
@@ -51,16 +51,16 @@ export default function MenPage() {
     try {
       setLoading(true);
       const response = await api.get('/products');
-      // Filter for men's products and unisex items
-      const menProducts = response.data.filter(
+      // Filter for women's products and unisex items
+      const womenProducts = response.data.filter(
         (product: Product) => 
-          product.gender === 'Men' || 
+          product.gender === 'Women' || 
           product.gender === 'Unisex' || 
-          product.gender === 'men' || 
+          product.gender === 'women' || 
           product.gender === 'unisex'
       );
-      setProducts(menProducts);
-      console.log(`Loaded ${menProducts.length} men's products`, menProducts);
+      setProducts(womenProducts);
+      console.log(`Loaded ${womenProducts.length} women's products`, womenProducts);
     } catch (error) {
       console.error('Error fetching products:', error);
       console.log('Failed to fetch from API, check if backend is running on http://localhost:5000');
@@ -94,26 +94,26 @@ export default function MenPage() {
   const featuredCollections = [
     {
       title: 'Running',
-      description: 'Performance shoes & apparel',
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800',
+      description: 'Performance shoes & gear',
+      image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800',
       category: 'Shoes',
     },
     {
       title: 'Training',
-      description: 'Gym-ready gear',
-      image: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800',
+      description: 'Workout essentials',
+      image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800',
       category: 'Apparel',
     },
     {
       title: 'Lifestyle',
-      description: 'Casual streetwear',
-      image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800',
+      description: 'Everyday style',
+      image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?w=800',
       category: 'Accessories',
     },
     {
-      title: 'Football',
-      description: 'Match day essentials',
-      image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800',
+      title: 'Yoga',
+      description: 'Mind & body wellness',
+      image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800',
       category: 'Sports',
     },
   ];
@@ -134,8 +134,8 @@ export default function MenPage() {
       <section className="relative bg-black overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1605408499391-6368c628ef42?w=1600"
-            alt="Men's Collection"
+            src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600"
+            alt="Women's Collection"
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
@@ -147,7 +147,7 @@ export default function MenPage() {
             <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
               <Link href="/" className="hover:text-white transition-colors">Home</Link>
               <FiChevronRight className="w-4 h-4" />
-              <span className="text-white font-medium">Men</span>
+              <span className="text-white font-medium">Women</span>
             </nav>
 
             <motion.div
@@ -156,10 +156,10 @@ export default function MenPage() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-6xl md:text-8xl font-black text-white mb-6 leading-tight">
-                MEN'S<br />COLLECTION
+                WOMEN'S<br />COLLECTION
               </h1>
               <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-xl">
-                Elevate your game with premium sportswear engineered for peak performance and style
+                Embrace your power with premium sportswear designed for performance, comfort, and style
               </p>
               <div className="flex flex-wrap gap-4">
                 <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20 flex items-center gap-2">
@@ -188,7 +188,7 @@ export default function MenPage() {
             Shop by Category
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400">
-            Discover our curated collections designed for champions
+            Discover collections designed for powerful women
           </p>
         </motion.div>
 
@@ -273,15 +273,6 @@ export default function MenPage() {
 
       {/* Products Grid */}
       <section className="container mx-auto px-4 py-12 pb-20">
-        {/* Debug Info */}
-        {!loading && (
-          <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg text-sm">
-            <p className="text-gray-900 dark:text-white">
-              Total products: {products.length} | Filtered: {filteredProducts.length} | Category: {selectedCategory}
-            </p>
-          </div>
-        )}
-        
         {loading ? (
           <div className="flex flex-col justify-center items-center py-32">
             <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-puma-red"></div>
@@ -301,7 +292,7 @@ export default function MenPage() {
                 No Products Found in {selectedCategory}
               </h3>
               <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-                But check out these popular men's items from our collection!
+                But check out these popular women's items from our collection!
               </p>
             </motion.div>
 
@@ -313,10 +304,10 @@ export default function MenPage() {
                   <div>
                     <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-3">
                       <FiTrendingUp className="w-8 h-8 text-puma-red" />
-                      Popular Men's Shoes
+                      Popular Women's Shoes
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      Step up your game with these bestsellers
+                      Step into style and comfort
                     </p>
                   </div>
                   <button
@@ -330,67 +321,31 @@ export default function MenPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                   {[
                     {
-                      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop',
-                      name: 'PUMA RS-X³ Puzzle Men',
-                      price: '₹11,999',
-                      originalPrice: '₹14,999',
-                      discount: '20% OFF',
-                      category: 'Men\'s Sneakers',
+                      image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=600&fit=crop',
+                      name: 'PUMA Carina 2.0 Women',
+                      price: '₹5,999',
+                      category: 'Women\'s Sneakers',
                       rating: '4.8'
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop',
-                      name: 'PUMA Suede Classic XXI Men',
-                      price: '₹6,999',
-                      originalPrice: '₹8,999',
-                      discount: '22% OFF',
-                      category: 'Men\'s Lifestyle',
+                      image: 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&h=600&fit=crop',
+                      name: 'PUMA Suede Classic Women',
+                      price: '₹6,499',
+                      category: 'Women\'s Lifestyle',
                       rating: '4.9'
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=600&h=600&fit=crop',
-                      name: 'PUMA MB.01 Basketball Men',
-                      price: '₹12,999',
-                      category: 'Men\'s Basketball',
+                      image: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&h=600&fit=crop',
+                      name: 'PUMA Velocity Nitro Women',
+                      price: '₹9,499',
+                      category: 'Women\'s Running',
                       rating: '4.7'
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=600&fit=crop',
-                      name: 'PUMA Velocity Nitro 2 Men',
-                      price: '₹9,999',
-                      category: 'Men\'s Running',
-                      rating: '4.6'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=600&fit=crop',
-                      name: 'PUMA Future Rider Play Men',
-                      price: '₹8,499',
-                      originalPrice: '₹9,999',
-                      discount: '15% OFF',
-                      category: 'Men\'s Lifestyle',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1605408499391-6368c628ef42?w=600&h=600&fit=crop',
-                      name: 'PUMA Clyde All-Pro Men',
-                      price: '₹13,499',
-                      category: 'Men\'s Basketball',
-                      rating: '4.8'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1512374382149-233c42b6a83b?w=600&h=600&fit=crop',
-                      name: 'PUMA Deviate Nitro 2 Men',
-                      price: '₹14,999',
-                      category: 'Men\'s Running',
-                      rating: '4.9'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&h=600&fit=crop',
-                      name: 'PUMA Slipstream Lo Men',
-                      price: '₹7,499',
-                      originalPrice: '₹9,499',
-                      discount: '21% OFF',
-                      category: 'Men\'s Sneakers',
+                      image: 'https://images.unsplash.com/photo-1595341888016-a392ef81b7de?w=600&h=600&fit=crop',
+                      name: 'PUMA RS-X Women',
+                      price: '₹10,999',
+                      category: 'Women\'s Training',
                       rating: '4.6'
                     }
                   ].map((item, index) => (
@@ -411,22 +366,12 @@ export default function MenPage() {
                         <div className="absolute top-4 right-4 bg-puma-red text-white px-3 py-1 rounded-full text-sm font-bold">
                           New
                         </div>
-                        {item.discount && (
-                          <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-                            {item.discount}
-                          </div>
-                        )}
                       </div>
                       <div className="p-6">
                         <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.category}</p>
                         <h4 className="text-xl font-black text-gray-900 dark:text-white mb-3">{item.name}</h4>
                         <div className="flex items-center justify-between">
-                          <div className="flex flex-col">
-                            <span className="text-2xl font-black text-puma-red">{item.price}</span>
-                            {item.originalPrice && (
-                              <span className="text-sm text-gray-400 line-through">{item.originalPrice}</span>
-                            )}
-                          </div>
+                          <span className="text-2xl font-black text-puma-red">{item.price}</span>
                           <div className="flex items-center gap-1">
                             <FiStar className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                             <span className="font-bold text-gray-900 dark:text-white">{item.rating}</span>
@@ -444,10 +389,10 @@ export default function MenPage() {
                   <div>
                     <h3 className="text-3xl font-black text-gray-900 dark:text-white mb-2 flex items-center gap-3">
                       <FiPackage className="w-8 h-8 text-puma-red" />
-                      Trending Men's Apparel
+                      Trending Women's Apparel
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      Elevate your style with premium clothing
+                      Performance meets style
                     </p>
                   </div>
                   <button
@@ -461,68 +406,32 @@ export default function MenPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                   {[
                     {
-                      image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop',
-                      name: 'PUMA ESS Logo Tee Men',
-                      price: '₹1,299',
-                      originalPrice: '₹1,799',
-                      discount: '28% OFF',
-                      category: 'Men\'s T-Shirts',
+                      image: 'https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=600&h=600&fit=crop',
+                      name: 'PUMA Training Tank Women',
+                      price: '₹1,799',
+                      category: 'Women\'s Tanks',
                       rating: '4.8'
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop',
-                      name: 'PUMA Essentials Hoodie Men',
-                      price: '₹3,999',
-                      category: 'Men\'s Hoodies',
-                      rating: '4.6'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=600&fit=crop',
-                      name: 'PUMA Classic Track Jacket Men',
-                      price: '₹4,999',
-                      originalPrice: '₹6,499',
-                      discount: '23% OFF',
-                      category: 'Men\'s Jackets',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=600&h=600&fit=crop',
-                      name: 'PUMA Active Woven Shorts Men',
-                      price: '₹1,999',
-                      category: 'Men\'s Shorts',
-                      rating: '4.5'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=600&fit=crop',
-                      name: 'PUMA Training Tank Men',
-                      price: '₹1,499',
-                      originalPrice: '₹1,999',
-                      discount: '25% OFF',
-                      category: 'Men\'s Tanks',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1626497764746-6dc36546b388?w=600&h=600&fit=crop',
-                      name: 'PUMA Teamwear Jersey Men',
-                      price: '₹2,499',
-                      category: 'Men\'s Sportswear',
-                      rating: '4.8'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?w=600&h=600&fit=crop',
-                      name: 'PUMA Running Jacket Men',
-                      price: '₹5,499',
-                      category: 'Men\'s Outerwear',
-                      rating: '4.6'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&h=600&fit=crop',
-                      name: 'PUMA Training Joggers Men',
+                      image: 'https://images.unsplash.com/photo-1622445275463-afa2ab738c34?w=600&h=600&fit=crop',
+                      name: 'PUMA Yoga Leggings Women',
                       price: '₹2,999',
-                      originalPrice: '₹3,999',
-                      discount: '25% OFF',
-                      category: 'Men\'s Pants',
+                      category: 'Women\'s Bottoms',
                       rating: '4.9'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1600091166971-7f9faad6c1e2?w=600&h=600&fit=crop',
+                      name: 'PUMA Sports Bra Women',
+                      price: '₹2,499',
+                      category: 'Women\'s Sports Bra',
+                      rating: '4.7'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1578932750355-5eb30ece487a?w=600&h=600&fit=crop',
+                      name: 'PUMA Training Jacket Women',
+                      price: '₹4,999',
+                      category: 'Women\'s Jackets',
+                      rating: '4.6'
                     }
                   ].map((item, index) => (
                     <motion.div
@@ -542,22 +451,12 @@ export default function MenPage() {
                         <div className="absolute top-4 right-4 bg-black text-white px-3 py-1 rounded-full text-sm font-bold">
                           Hot
                         </div>
-                        {item.discount && (
-                          <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-                            {item.discount}
-                          </div>
-                        )}
                       </div>
                       <div className="p-6">
                         <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.category}</p>
                         <h4 className="text-xl font-black text-gray-900 dark:text-white mb-3">{item.name}</h4>
                         <div className="flex items-center justify-between">
-                          <div className="flex flex-col">
-                            <span className="text-2xl font-black text-puma-red">{item.price}</span>
-                            {item.originalPrice && (
-                              <span className="text-sm text-gray-400 line-through">{item.originalPrice}</span>
-                            )}
-                          </div>
+                          <span className="text-2xl font-black text-puma-red">{item.price}</span>
                           <div className="flex items-center gap-1">
                             <FiStar className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                             <span className="font-bold text-gray-900 dark:text-white">{item.rating}</span>
@@ -578,7 +477,7 @@ export default function MenPage() {
                       Must-Have Accessories
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      Complete your look with these essentials
+                      Complete your active lifestyle
                     </p>
                   </div>
                   <button
@@ -592,66 +491,32 @@ export default function MenPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                   {[
                     {
-                      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=600&fit=crop',
-                      name: 'PUMA Phase Backpack',
-                      price: '₹1,799',
-                      originalPrice: '₹2,499',
-                      discount: '28% OFF',
-                      category: 'Unisex Bags',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1588099768531-a72d4a198538?w=600&h=600&fit=crop',
-                      name: 'PUMA Sports Cap',
-                      price: '₹999',
-                      category: 'Unisex Headwear',
-                      rating: '4.6'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=600&h=600&fit=crop',
-                      name: 'PUMA Quarter Socks 3-Pack Men',
-                      price: '₹699',
-                      originalPrice: '₹999',
-                      discount: '30% OFF',
-                      category: 'Men\'s Socks',
-                      rating: '4.8'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1605348532760-6753d2c43329?w=600&h=600&fit=crop',
-                      name: 'PUMA Training Gloves',
-                      price: '₹1,299',
-                      category: 'Unisex Gear',
-                      rating: '4.5'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1575149572942-1561024927da?w=600&h=600&fit=crop',
-                      name: 'PUMA Gym Duffle Bag',
-                      price: '₹2,999',
-                      category: 'Men\'s Bags',
-                      rating: '4.7'
-                    },
-                    {
-                      image: 'https://images.unsplash.com/photo-1623874228601-f4193c7b1818?w=600&h=600&fit=crop',
-                      name: 'PUMA Sport Sunglasses',
+                      image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&h=600&fit=crop',
+                      name: 'PUMA Yoga Mat',
                       price: '₹2,499',
-                      originalPrice: '₹3,499',
-                      discount: '29% OFF',
+                      category: 'Fitness Gear',
+                      rating: '4.7'
+                    },
+                    {
+                      image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&h=600&fit=crop',
+                      name: 'PUMA Water Bottle',
+                      price: '₹899',
                       category: 'Accessories',
                       rating: '4.6'
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=600&h=600&fit=crop',
-                      name: 'PUMA Water Bottle 1L',
-                      price: '₹799',
-                      category: 'Hydration',
+                      image: 'https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=600&fit=crop',
+                      name: 'PUMA Sports Bag Women',
+                      price: '₹2,999',
+                      category: 'Women\'s Bags',
                       rating: '4.8'
                     },
                     {
-                      image: 'https://images.unsplash.com/photo-1622290291468-a28f7a7e6a0e?w=600&h=600&fit=crop',
-                      name: 'PUMA Training Belt',
-                      price: '₹1,499',
-                      category: 'Men\'s Accessories',
-                      rating: '4.4'
+                      image: 'https://images.unsplash.com/photo-1577071835592-db06c0aad1c8?w=600&h=600&fit=crop',
+                      name: 'PUMA Headband Set',
+                      price: '₹599',
+                      category: 'Hair Accessories',
+                      rating: '4.5'
                     }
                   ].map((item, index) => (
                     <motion.div
@@ -671,22 +536,12 @@ export default function MenPage() {
                         <div className="absolute top-4 right-4 bg-puma-red text-white px-3 py-1 rounded-full text-sm font-bold">
                           Sale
                         </div>
-                        {item.discount && (
-                          <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
-                            {item.discount}
-                          </div>
-                        )}
                       </div>
                       <div className="p-6">
                         <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{item.category}</p>
                         <h4 className="text-xl font-black text-gray-900 dark:text-white mb-3">{item.name}</h4>
                         <div className="flex items-center justify-between">
-                          <div className="flex flex-col">
-                            <span className="text-2xl font-black text-puma-red">{item.price}</span>
-                            {item.originalPrice && (
-                              <span className="text-sm text-gray-400 line-through">{item.originalPrice}</span>
-                            )}
-                          </div>
+                          <span className="text-2xl font-black text-puma-red">{item.price}</span>
                           <div className="flex items-center gap-1">
                             <FiStar className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                             <span className="font-bold text-gray-900 dark:text-white">{item.rating}</span>
@@ -709,7 +564,7 @@ export default function MenPage() {
                 Ready to Shop?
               </h3>
               <p className="text-xl text-white/90 mb-8">
-                Explore our complete men's collection and find your perfect fit
+                Explore our complete women's collection and find your perfect fit
               </p>
               <button
                 onClick={() => setSelectedCategory('All')}

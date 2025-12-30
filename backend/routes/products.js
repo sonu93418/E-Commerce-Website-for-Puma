@@ -68,18 +68,8 @@ router.get('/', async (req, res) => {
 
     const total = await Product.countDocuments(query);
 
-    res.json({
-      success: true,
-      data: {
-        products,
-        pagination: {
-          currentPage: Number(page),
-          totalPages: Math.ceil(total / limit),
-          totalProducts: total,
-          hasMore: skip + products.length < total
-        }
-      }
-    });
+    // Return products directly to match frontend expectations
+    res.json(products);
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -122,10 +112,8 @@ router.get('/:id', async (req, res) => {
       });
     }
 
-    res.json({
-      success: true,
-      data: { product }
-    });
+    // Return product directly to match frontend expectations
+    res.json(product);
   } catch (error) {
     res.status(500).json({
       success: false,
