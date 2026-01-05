@@ -195,7 +195,7 @@ export default function Navbar() {
 
             {/* User Menu */}
             {isAuthenticated ? (
-              <Link href="/profile">
+              <Link href="/account">
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
