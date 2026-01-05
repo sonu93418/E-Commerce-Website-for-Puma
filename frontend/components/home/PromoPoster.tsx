@@ -135,7 +135,7 @@ export default function PromoPoster() {
               className="mt-8 text-sm"
             >
               <p className="bg-black/20 backdrop-blur-sm inline-block px-6 py-2 rounded-full">
-                Free Shipping on Orders Over $75 | Easy Returns
+                Free Shipping on Orders Over ₹200,000 | Easy Returns
               </p>
             </motion.div>
           </div>

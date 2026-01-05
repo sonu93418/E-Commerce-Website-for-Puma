@@ -24,7 +24,7 @@ export default function CartPage() {
   };
 
   const subtotal = totalPrice;
-  const shipping = subtotal > 2500 ? 0 : 150;
+  const shipping = subtotal > 200000 ? 0 : 1000;
   const discountAmount = subtotal * discount;
   const total = subtotal + shipping - discountAmount;
 
@@ -259,7 +259,7 @@ export default function CartPage() {
               {shipping > 0 && (
                 <div className="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
                   <p className="text-sm font-semibold text-yellow-800 dark:text-yellow-300">
-                    Add ₹{(2500 - subtotal).toLocaleString()} more to get FREE shipping!
+                    Add ₹{(200000 - subtotal).toLocaleString()} more to get FREE shipping!
                   </p>
                 </div>
               )}

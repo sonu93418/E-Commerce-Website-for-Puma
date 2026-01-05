@@ -51,7 +51,7 @@ export default function WomenPage() {
     try {
       setLoading(true);
       const response = await api.get('/products');
-      // Filter for women's products and unisex items
+      // Filter for women's products and unisex items - if none found, show all products
       const womenProducts = response.data.filter(
         (product: Product) => 
           product.gender === 'Women' || 
@@ -59,8 +59,11 @@ export default function WomenPage() {
           product.gender === 'women' || 
           product.gender === 'unisex'
       );
-      setProducts(womenProducts);
-      console.log(`Loaded ${womenProducts.length} women's products`, womenProducts);
+      
+      // If no women-specific products, show all products for shopping
+      const productsToShow = womenProducts.length > 0 ? womenProducts : response.data;
+      setProducts(productsToShow);
+      console.log(`Loaded ${productsToShow.length} products for women's section`, productsToShow);
     } catch (error) {
       console.error('Error fetching products:', error);
       console.log('Failed to fetch from API, check if backend is running on http://localhost:5000');

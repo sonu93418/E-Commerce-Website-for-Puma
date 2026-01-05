@@ -24,8 +24,8 @@ router.post('/', protect, async (req, res) => {
 
     // Calculate prices
     const itemsPrice = orderItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const taxPrice = itemsPrice * 0.10; // 10% tax
-    const shippingPrice = itemsPrice > 100 ? 0 : 10;
+    const taxPrice = itemsPrice * 0.18; // 18% GST for India
+    const shippingPrice = itemsPrice > 200000 ? 0 : 1000; // Free shipping above ₹200,000
     const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
     const order = await Order.create({
@@ -174,6 +174,59 @@ router.post('/create-payment-intent', protect, async (req, res) => {
       data: {
         clientSecret: paymentIntent.client_secret
       }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// @route   PUT /api/orders/:id/cancel
+// @desc    Cancel order
+// @access  Private
+router.put('/:id/cancel', protect, async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        message: 'Order not found'
+      });
+    }
+
+    // Check if user owns this order
+    if (order.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({
+        success: false,
+        message: 'Not authorized to cancel this order'
+      });
+    }
+
+    // Check if order can be cancelled (only pending or processing orders)
+    if (order.orderStatus === 'shipped' || order.orderStatus === 'delivered') {
+      return res.status(400).json({
+        success: false,
+        message: 'Cannot cancel order that has been shipped or delivered'
+      });
+    }
+
+    if (order.orderStatus === 'cancelled') {
+      return res.status(400).json({
+        success: false,
+        message: 'Order is already cancelled'
+      });
+    }
+
+    order.orderStatus = 'cancelled';
+    await order.save();
+
+    res.json({
+      success: true,
+      message: 'Order cancelled successfully',
+      data: { order }
     });
   } catch (error) {
     res.status(500).json({

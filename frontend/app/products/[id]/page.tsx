@@ -94,17 +94,16 @@ export default function ProductDetailPage() {
   const handleAddToCart = () => {
     if (!product) return;
     
-    if (!selectedSize || !selectedColor) {
-      toast.error('Please select size and color');
-      return;
-    }
+    // Use selected values or defaults
+    const finalSize = selectedSize || (product.sizes && product.sizes.length > 0 ? product.sizes[0].size : 'One Size');
+    const finalColor = selectedColor || (product.colors && product.colors.length > 0 ? product.colors[0].name : 'Default');
 
     const cartItem = {
-      _id: `${product._id}-${selectedSize}-${selectedColor}`,
+      _id: `${product._id}-${finalSize}-${finalColor}`,
       product: product,
       quantity: quantity,
-      size: selectedSize,
-      color: selectedColor,
+      size: finalSize,
+      color: finalColor,
       price: product.price,
     };
 
@@ -305,12 +304,9 @@ export default function ProductDetailPage() {
                     <button
                       key={size.size}
                       onClick={() => setSelectedSize(size.size)}
-                      disabled={size.stock === 0}
                       className={`px-6 py-3 rounded-lg border-2 transition-all font-semibold ${
                         selectedSize === size.size
                           ? 'border-puma-red bg-puma-red text-white'
-                          : size.stock === 0
-                          ? 'border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed'
                           : 'border-gray-300 dark:border-gray-600 hover:border-puma-red'
                       }`}
                     >

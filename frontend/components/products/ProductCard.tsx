@@ -39,6 +39,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const handleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     if (inWishlist) {
       removeFromWishlist(product._id);
       toast.success('Removed from wishlist');
@@ -50,6 +51,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     // For quick add, use default size and color
     const cartItem = {
       _id: `${product._id}-default`,
@@ -189,11 +191,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div className="mt-auto">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-xl font-bold text-gray-900 dark:text-white">
-                ${product.price}
+                ₹{product.price}
               </span>
               {product.originalPrice && (
                 <span className="text-sm text-gray-500 line-through">
-                  ${product.originalPrice}
+                  ₹{product.originalPrice}
                 </span>
               )}
             </div>

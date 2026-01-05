@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FiPackage, FiTruck, FiCheck, FiClock, FiMapPin, FiDollarSign, FiCalendar } from 'react-icons/fi';
+import { FiPackage, FiTruck, FiCheck, FiClock, FiMapPin, FiDollarSign, FiCalendar, FiX } from 'react-icons/fi';
 import { useAuthStore } from '@/store/authStore';
 import api from '@/lib/api';
 import { toast } from 'react-hot-toast';
@@ -95,7 +95,29 @@ export default function OrderDetailPage() {
     }
   };
 
+  const handleCancelOrder = async () => {
+    if (!window.confirm('Are you sure you want to cancel this order?')) {
+      return;
+    }
+
+    try {
+      const response = await api.put(`/orders/${params.id}/cancel`);
+      toast.success('Order cancelled successfully');
+      fetchOrderDetails(); // Refresh order data
+    } catch (error: any) {
+      console.error('Error cancelling order:', error);
+      toast.error(error.response?.data?.message || 'Failed to cancel order');
+    }
+  };
+
   const getStatusSteps = () => {
+    // If order is cancelled, show special cancelled message
+    if (order?.status.toLowerCase() === 'cancelled') {
+      return [
+        { name: 'Order Cancelled', icon: FiX, status: 'cancelled', completed: true, active: true }
+      ];
+    }
+
     const steps = [
       { name: 'Order Placed', icon: FiCheck, status: 'pending' },
       { name: 'Processing', icon: FiPackage, status: 'processing' },
@@ -144,15 +166,31 @@ export default function OrderDetailPage() {
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
               Order #{order.orderNumber}
             </h1>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
-              {new Date(order.createdAt).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
-            </span>
+            <div className="flex flex-col sm:items-end gap-2">
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {new Date(order.createdAt).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              </span>
+              {/* Cancel Order Button - Only show for pending/processing orders */}
+              {(order.status === 'pending' || order.status === 'processing') && (
+                <button
+                  onClick={handleCancelOrder}
+                  className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold text-sm transition-colors"
+                >
+                  Cancel Order
+                </button>
+              )}
+              {order.status === 'cancelled' && (
+                <span className="px-4 py-2 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg font-semibold text-sm">
+                  Order Cancelled
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
@@ -181,14 +219,18 @@ export default function OrderDetailPage() {
                     
                     {/* Icon */}
                     <div className={`relative z-10 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                      step.completed
+                      step.status === 'cancelled'
+                        ? 'bg-red-500 dark:bg-red-600'
+                        : step.completed
                         ? 'bg-gray-900 dark:bg-white'
                         : step.active
                         ? 'bg-gray-300 dark:bg-gray-700 animate-pulse'
                         : 'bg-gray-100 dark:bg-gray-800'
                     }`}>
                       <step.icon className={`w-6 h-6 ${
-                        step.completed ? 'text-white dark:text-gray-900' : 'text-gray-400 dark:text-gray-500'
+                        step.status === 'cancelled'
+                          ? 'text-white'
+                          : step.completed ? 'text-white dark:text-gray-900' : 'text-gray-400 dark:text-gray-500'
                       }`} />
                     </div>
                     
@@ -235,11 +277,11 @@ export default function OrderDetailPage() {
                       <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
                         <span>Qty: {item.quantity}</span>
                         <span>×</span>
-                        <span>${item.price.toFixed(2)}</span>
+                        <span>₹{item.price.toFixed(2)}</span>
                       </div>
                     </div>
                     <p className="text-base font-bold text-gray-900 dark:text-white">
-                      ${(item.quantity * item.price).toFixed(2)}
+                      ₹{(item.quantity * item.price).toFixed(2)}
                     </p>
                   </div>
                 ))}
@@ -256,7 +298,7 @@ export default function OrderDetailPage() {
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    ${order.totalAmount.toFixed(2)}
+                    ₹{order.totalAmount.toFixed(2)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
@@ -267,7 +309,7 @@ export default function OrderDetailPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-base font-bold text-gray-900 dark:text-white">Total</span>
                   <span className="text-xl font-bold text-gray-900 dark:text-white">
-                    ${order.totalAmount.toFixed(2)}
+                    ₹{order.totalAmount.toFixed(2)}
                   </span>
                 </div>
               </div>
