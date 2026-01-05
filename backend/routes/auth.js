@@ -47,7 +47,9 @@ router.post('/register', async (req, res) => {
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
-          role: user.role
+          role: user.role,
+          name: `${user.firstName} ${user.lastName}`,
+          createdAt: user.createdAt
         },
         token
       }
@@ -97,7 +99,9 @@ router.post('/login', async (req, res) => {
           lastName: user.lastName,
           email: user.email,
           role: user.role,
-          avatar: user.avatar
+          avatar: user.avatar,
+          name: `${user.firstName} ${user.lastName}`,
+          createdAt: user.createdAt
         },
         token
       }

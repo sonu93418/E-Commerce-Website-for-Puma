@@ -22,7 +22,9 @@ router.get('/profile', protect, async (req, res) => {
           phone: user.phone,
           avatar: user.avatar,
           addresses: user.addresses,
-          role: user.role
+          role: user.role,
+          name: `${user.firstName} ${user.lastName}`,
+          createdAt: user.createdAt
         }
       }
     });
@@ -61,7 +63,9 @@ router.put('/profile', protect, async (req, res) => {
           email: user.email,
           phone: user.phone,
           avatar: user.avatar,
-          role: user.role
+          role: user.role,
+          name: `${user.firstName} ${user.lastName}`,
+          createdAt: user.createdAt
         }
       }
     });
@@ -150,6 +154,101 @@ router.delete('/addresses/:addressId', protect, async (req, res) => {
       success: true,
       message: 'Address deleted successfully',
       data: { addresses: user.addresses }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// @route   GET /api/user/addresses
+// @desc    Get all addresses
+// @access  Private
+router.get('/addresses', protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    
+    res.json({
+      success: true,
+      data: { addresses: user.addresses }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// @route   PUT /api/user/addresses/:addressId/default
+// @desc    Set default address
+// @access  Private
+router.put('/addresses/:addressId/default', protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    
+    // Unset all defaults
+    user.addresses.forEach(addr => addr.isDefault = false);
+    
+    // Set the specified address as default
+    const address = user.addresses.id(req.params.addressId);
+    if (!address) {
+      return res.status(404).json({
+        success: false,
+        message: 'Address not found'
+      });
+    }
+    
+    address.isDefault = true;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Default address updated successfully',
+      data: { addresses: user.addresses }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+});
+
+// @route   PUT /api/user/password
+// @desc    Change password
+// @access  Private
+router.put('/password', protect, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({
+        success: false,
+        message: 'Please provide both current and new password'
+      });
+    }
+
+    const user = await User.findById(req.user._id).select('+password');
+
+    // Check current password
+    const isMatch = await user.comparePassword(currentPassword);
+    if (!isMatch) {
+      return res.status(401).json({
+        success: false,
+        message: 'Current password is incorrect'
+      });
+    }
+
+    // Update password
+    user.password = newPassword;
+    await user.save();
+
+    res.json({
+      success: true,
+      message: 'Password updated successfully'
     });
   } catch (error) {
     res.status(500).json({

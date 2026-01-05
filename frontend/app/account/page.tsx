@@ -71,7 +71,7 @@ export default function AccountPage() {
                 My Account
               </h1>
               <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-                Welcome back, <span className="font-semibold">{user?.name}</span>
+                Welcome back, <span className="font-semibold">{user?.name || `${user?.firstName} ${user?.lastName}`}</span>
               </p>
             </div>
             <button

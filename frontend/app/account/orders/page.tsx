@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { FiPackage, FiTruck, FiCheck, FiX, FiClock, FiChevronRight } from 'react-icons/fi';
+import { FiPackage, FiTruck, FiCheck, FiX, FiClock, FiChevronRight, FiMapPin } from 'react-icons/fi';
 import { useAuthStore } from '@/store/authStore';
 import api from '@/lib/api';
 import { toast } from 'react-hot-toast';
@@ -240,7 +240,7 @@ export default function OrdersPage() {
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                         {order.shippingAddress.street}<br />
-                        {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.postalCode}
+                        {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}
                       </p>
                     </div>
                   )}

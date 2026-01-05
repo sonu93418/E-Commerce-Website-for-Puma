@@ -27,7 +27,7 @@ export default function ProfilePage() {
     } else {
       setFormData(prev => ({
         ...prev,
-        name: user.name || '',
+        name: user.name || `${user.firstName} ${user.lastName}` || '',
         email: user.email || ''
       }));
     }
@@ -50,12 +50,24 @@ export default function ProfilePage() {
 
     try {
       setLoading(true);
+      
+      // Split name into firstName and lastName
+      const nameParts = formData.name.trim().split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || nameParts[0];
+      
       const response = await api.put('/users/profile', {
-        name: formData.name,
+        firstName,
+        lastName,
         email: formData.email
       });
 
-      setUser(response.data.data || response.data.user);
+      const updatedUser = response.data.data?.user || response.data.user;
+      setUser({
+        ...updatedUser,
+        name: `${updatedUser.firstName} ${updatedUser.lastName}`
+      });
+      
       toast.success('Profile updated successfully');
     } catch (error: any) {
       console.error('Error updating profile:', error);
@@ -269,13 +281,15 @@ export default function ProfilePage() {
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">
               Account Information
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              Your account was created on {new Date(user.createdAt || Date.now()).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </p>
+            {user.createdAt && (
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                Your account was created on {new Date(user.createdAt).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </p>
+            )}
             <button className="text-sm font-semibold text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors">
               Delete Account
             </button>

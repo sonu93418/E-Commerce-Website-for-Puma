@@ -11,13 +11,14 @@ import { toast } from 'react-hot-toast';
 
 interface Address {
   _id: string;
-  fullName: string;
+  fullName?: string;
   street: string;
   city: string;
   state: string;
-  zipCode: string;
+  zipCode?: string;
+  postalCode?: string;
   country: string;
-  phone: string;
+  phone?: string;
   isDefault: boolean;
 }
 
@@ -78,10 +79,16 @@ export default function AddressesPage() {
 
     try {
       if (editingId) {
-        await api.put(`/users/addresses/${editingId}`, formData);
+        await api.put(`/users/addresses/${editingId}`, {
+          ...formData,
+          postalCode: formData.zipCode
+        });
         toast.success('Address updated successfully');
       } else {
-        await api.post('/users/addresses', formData);
+        await api.post('/users/addresses', {
+          ...formData,
+          postalCode: formData.zipCode
+        });
         toast.success('Address added successfully');
       }
       
@@ -97,11 +104,11 @@ export default function AddressesPage() {
 
   const handleEdit = (address: Address) => {
     setFormData({
-      fullName: address.fullName,
+      fullName: address.fullName || '',
       street: address.street,
       city: address.city,
       state: address.state,
-      zipCode: address.zipCode,
+      zipCode: address.zipCode || address.postalCode || '',
       country: address.country || 'United States',
       phone: address.phone || '',
       isDefault: address.isDefault
@@ -377,7 +384,7 @@ export default function AddressesPage() {
 
                 <div className="mb-4">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                    {address.fullName}
+                    {address.fullName || 'Address'}
                   </h3>
                   {address.phone && (
                     <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -388,7 +395,7 @@ export default function AddressesPage() {
 
                 <div className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
                   <p>{address.street}</p>
-                  <p>{address.city}, {address.state} {address.zipCode}</p>
+                  <p>{address.city}, {address.state} {address.zipCode || address.postalCode}</p>
                   <p>{address.country}</p>
                 </div>
 
