@@ -11,14 +11,9 @@ export default function WelcomeScreen() {
   const hasAnimated = useRef(false);
 
   useEffect(() => {
-    // Check if welcome screen has been shown before
-    const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
-    
-    if (!hasSeenWelcome) {
-      setShouldShow(true);
-      setIsVisible(true);
-      sessionStorage.setItem('hasSeenWelcome', 'true');
-    }
+    // Always show welcome animation (removed session check)
+    setShouldShow(true);
+    setIsVisible(true);
   }, []);
 
   useEffect(() => {
