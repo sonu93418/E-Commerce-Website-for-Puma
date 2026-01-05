@@ -24,7 +24,7 @@ export default function WelcomeScreen() {
   useEffect(() => {
     if (!shouldShow || !isVisible || hasAnimated.current) return;
 
-    // GSAP animation for logo reveal
+    // GSAP animation for logo reveal - quick 1 second animation
     if (logoRef.current) {
       hasAnimated.current = true;
       
@@ -39,21 +39,17 @@ export default function WelcomeScreen() {
           clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
           scale: 1,
           opacity: 1,
-          ease: 'expo.out',
-          duration: 1.5,
-          delay: 0.5,
+          ease: 'power2.out',
+          duration: 0.6,
+          delay: 0.2,
         }
       );
     }
 
-    // Hide welcome screen after animation completes
-    // Text animation: 1.5s duration * 2 repeats + delays = ~5s
-    // Logo animation: 0.5s delay + 1.5s duration = 2s
-    // Exit animation: 0.8s
-    // Total: ~5.8s for smooth transition
+    // Hide welcome screen after 1 second total
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 5800);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [shouldShow, isVisible]);
@@ -66,7 +62,7 @@ export default function WelcomeScreen() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-black overflow-hidden"
         >
           {/* Alternating Black and White Stripes */}
@@ -82,10 +78,10 @@ export default function WelcomeScreen() {
                 <motion.div
                   animate={{ x: ['-100%', '100%'] }}
                   transition={{
-                    duration: 1.5,
-                    repeat: 2,
+                    duration: 1,
+                    repeat: 0,
                     ease: 'linear',
-                    delay: i * 0.15,
+                    delay: i * 0.05,
                   }}
                   className="whitespace-nowrap flex"
                 >
