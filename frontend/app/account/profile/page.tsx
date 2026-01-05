@@ -13,6 +13,7 @@ export default function ProfilePage() {
   const router = useRouter();
   const { user, setUser } = useAuthStore();
   const [loading, setLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,16 +23,22 @@ export default function ProfilePage() {
   });
 
   useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        name: user.name || `${user.firstName} ${user.lastName}` || '',
-        email: user.email || ''
-      }));
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      if (!user) {
+        router.push('/login');
+      } else {
+        setFormData(prev => ({
+          ...prev,
+          name: user.name || `${user.firstName} ${user.lastName}` || '',
+          email: user.email || ''
+        }));
+      }
     }
-  }, [user, router]);
+  }, [user, router, mounted]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -118,9 +125,9 @@ export default function ProfilePage() {
     }
   };
 
-  if (!user) {
+  if (!mounted || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-gray-900 dark:border-white"></div>
       </div>
     );

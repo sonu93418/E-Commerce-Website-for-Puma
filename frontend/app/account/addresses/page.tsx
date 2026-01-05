@@ -27,6 +27,7 @@ export default function AddressesPage() {
   const { user } = useAuthStore();
   const [addresses, setAddresses] = useState<Address[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -41,12 +42,18 @@ export default function AddressesPage() {
   });
 
   useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    } else {
-      fetchAddresses();
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      if (!user) {
+        router.push('/login');
+      } else {
+        fetchAddresses();
+      }
     }
-  }, [user, router]);
+  }, [user, router, mounted]);
 
   const fetchAddresses = async () => {
     try {
@@ -164,10 +171,14 @@ export default function AddressesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-gray-900 dark:border-white"></div>
       </div>
     );
+  }
+
+  if (!user) {
+    return null;
   }
 
   return (

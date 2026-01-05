@@ -11,26 +11,37 @@ export default function AccountPage() {
   const router = useRouter();
   const { user, logout } = useAuthStore();
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    } else {
-      setLoading(false);
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      if (!user) {
+        router.push('/login');
+      } else {
+        setLoading(false);
+      }
     }
-  }, [user, router]);
+  }, [user, router, mounted]);
 
   const handleLogout = () => {
     logout();
     router.push('/');
   };
 
-  if (loading) {
+  if (!mounted || loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-puma-red"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-gray-900 dark:border-white"></div>
       </div>
     );
+  }
+
+  if (!user) {
+    return null;
   }
 
   const accountSections = [

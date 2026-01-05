@@ -39,14 +39,21 @@ export default function OrdersPage() {
   const { user } = useAuthStore();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    } else {
-      fetchOrders();
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      if (!user) {
+        router.push('/login');
+      } else {
+        fetchOrders();
+      }
     }
-  }, [user, router]);
+  }, [user, router, mounted]);
 
   const fetchOrders = async () => {
     try {
@@ -119,10 +126,14 @@ export default function OrdersPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-puma-red"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-gray-900 dark:border-white"></div>
       </div>
     );
+  }
+
+  if (!user) {
+    return null;
   }
 
   return (

@@ -43,14 +43,21 @@ export default function OrderDetailPage() {
   const { user } = useAuthStore();
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    } else {
-      fetchOrderDetails();
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      if (!user) {
+        router.push('/login');
+      } else {
+        fetchOrderDetails();
+      }
     }
-  }, [user, router, params.id]);
+  }, [user, router, params.id, mounted]);
 
   const fetchOrderDetails = async () => {
     try {
@@ -107,13 +114,13 @@ export default function OrderDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-gray-900 dark:border-white"></div>
       </div>
     );
   }
 
-  if (!order) {
+  if (!order || !user) {
     return null;
   }
 
