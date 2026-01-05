@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Montserrat } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
+import ConditionalFooter from '@/components/layout/ConditionalFooter'
 import WelcomeScreen from '@/components/WelcomeScreen'
 import { Toaster } from 'react-hot-toast'
 
@@ -37,7 +37,7 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
-        <Footer />
+        <ConditionalFooter />
         <Toaster
           position="top-center"
           toastOptions={{

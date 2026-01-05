@@ -722,6 +722,875 @@ const sampleProducts = [
     rating: { average: 4.8, count: 289 },
     isFeatured: true,
   },
+  // New Puma Sports Items
+  {
+    name: 'PUMA King Platinum FG Football Boots',
+    description: 'Premium leather football boots with K-BETTER technology for ultimate touch and comfort. Designed for playmakers who control the game.',
+    price: 190,
+    originalPrice: 220,
+    category: 'Sports',
+    subCategory: 'Football',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=800', alt: 'PUMA King Platinum' }
+    ],
+    colors: [
+      { name: 'Black/Gold', hex: '#000000', images: ['https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=800'] },
+      { name: 'White/Red', hex: '#FFFFFF', images: ['https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=800'] }
+    ],
+    sizes: [
+      { size: '7', stock: 8 },
+      { size: '8', stock: 12 },
+      { size: '9', stock: 15 },
+      { size: '10', stock: 10 },
+      { size: '11', stock: 5 }
+    ],
+    totalStock: 50,
+    features: ['K-BETTER technology', 'Premium K-leather', 'RAPIDSPRINT outsole', 'Enhanced ball control'],
+    tags: ['football', 'soccer', 'boots', 'premium', 'king'],
+    rating: { average: 4.9, count: 267 },
+    isFeatured: true,
+    isBestseller: true,
+  },
+  {
+    name: 'Ignite Pwradapt Golf Shoes',
+    description: 'Revolutionary golf shoes with Pwradapt technology for superior stability and comfort on the course.',
+    price: 175,
+    category: 'Sports',
+    subCategory: 'Golf',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=800', alt: 'Golf Shoes' }
+    ],
+    colors: [
+      { name: 'White/Gray', hex: '#FFFFFF', images: ['https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=800'] },
+      { name: 'Black/Silver', hex: '#000000', images: ['https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=800'] }
+    ],
+    sizes: [
+      { size: '8', stock: 10 },
+      { size: '9', stock: 15 },
+      { size: '10', stock: 12 },
+      { size: '11', stock: 8 }
+    ],
+    totalStock: 45,
+    features: ['Pwradapt technology', 'IGNITE foam cushioning', 'Waterproof', 'Spikeless design'],
+    tags: ['golf', 'shoes', 'sports', 'performance'],
+    rating: { average: 4.8, count: 134 },
+    isNewArrival: true,
+  },
+  {
+    name: 'Active Gaming Footwear',
+    description: 'The world\'s first gaming footwear designed in collaboration with esports professionals for ultimate comfort during long gaming sessions.',
+    price: 110,
+    category: 'Shoes',
+    subCategory: 'Sneakers',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800', alt: 'Gaming Footwear' }
+    ],
+    colors: [
+      { name: 'Black/Blue', hex: '#000000', images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'] }
+    ],
+    sizes: [
+      { size: '7', stock: 12 },
+      { size: '8', stock: 18 },
+      { size: '9', stock: 20 },
+      { size: '10', stock: 15 },
+      { size: '11', stock: 10 }
+    ],
+    totalStock: 75,
+    features: ['Comfort collar', 'Medial grip socks', 'Lightweight construction', 'Gaming optimized'],
+    tags: ['gaming', 'sneakers', 'esports', 'innovative'],
+    rating: { average: 4.6, count: 89 },
+    isFeatured: true,
+    isNewArrival: true,
+  },
+  {
+    name: 'One8 Cricket Shoes Spike',
+    description: 'High-performance cricket shoes designed with Virat Kohli for exceptional grip and support on the pitch.',
+    price: 125,
+    category: 'Sports',
+    subCategory: 'Cricket',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800', alt: 'Cricket Shoes' }
+    ],
+    colors: [
+      { name: 'White/Blue', hex: '#FFFFFF', images: ['https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800'] }
+    ],
+    sizes: [
+      { size: '7', stock: 10 },
+      { size: '8', stock: 15 },
+      { size: '9', stock: 18 },
+      { size: '10', stock: 12 },
+      { size: '11', stock: 8 }
+    ],
+    totalStock: 63,
+    features: ['Spike outsole', 'Ankle support', 'Breathable upper', 'One8 branding'],
+    tags: ['cricket', 'shoes', 'sports', 'one8', 'spike'],
+    rating: { average: 4.7, count: 156 },
+    isBestseller: true,
+  },
+  {
+    name: 'Tennis Training Ball - 3 Pack',
+    description: 'ITF approved tennis balls with superior durability and consistent bounce for all court surfaces.',
+    price: 12,
+    category: 'Sports',
+    subCategory: 'Tennis',
+    gender: 'Unisex',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1622163642998-1ea32b0bbc67?w=800', alt: 'Tennis Balls' }
+    ],
+    colors: [
+      { name: 'Yellow', hex: '#FFFF00', images: ['https://images.unsplash.com/photo-1622163642998-1ea32b0bbc67?w=800'] }
+    ],
+    sizes: [
+      { size: '3-Pack', stock: 100 }
+    ],
+    totalStock: 100,
+    features: ['ITF approved', '3-ball pack', 'All court surface', 'Professional quality'],
+    tags: ['tennis', 'balls', 'sports', 'training'],
+    rating: { average: 4.6, count: 234 },
+  },
+  {
+    name: 'Badminton Racket Pro Series',
+    description: 'Lightweight badminton racket with carbon fiber construction for power and precision.',
+    price: 85,
+    originalPrice: 100,
+    category: 'Sports',
+    subCategory: 'Badminton',
+    gender: 'Unisex',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800', alt: 'Badminton Racket' }
+    ],
+    colors: [
+      { name: 'Red/Black', hex: '#FF0000', images: ['https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800'] },
+      { name: 'Blue/Silver', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=800'] }
+    ],
+    sizes: [
+      { size: 'Standard', stock: 35 }
+    ],
+    totalStock: 35,
+    features: ['Carbon fiber frame', 'Isometric head shape', 'Lightweight 85g', 'Professional grade'],
+    tags: ['badminton', 'racket', 'sports', 'indoor'],
+    rating: { average: 4.7, count: 98 },
+    isNewArrival: true,
+  },
+  {
+    name: 'Netfit Training Shoes',
+    description: 'Revolutionary training shoes with NETFIT lacing system for customizable fit and support.',
+    price: 95,
+    originalPrice: 120,
+    category: 'Shoes',
+    subCategory: 'Training',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800', alt: 'Training Shoes' }
+    ],
+    colors: [
+      { name: 'Black/Yellow', hex: '#000000', images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'] },
+      { name: 'Gray/Orange', hex: '#808080', images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'] }
+    ],
+    sizes: [
+      { size: '7', stock: 12 },
+      { size: '8', stock: 18 },
+      { size: '9', stock: 22 },
+      { size: '10', stock: 15 },
+      { size: '11', stock: 8 }
+    ],
+    totalStock: 75,
+    features: ['NETFIT lacing system', 'Multi-directional support', 'Cushioned midsole', 'Durable rubber outsole'],
+    tags: ['training', 'gym', 'netfit', 'crossfit'],
+    rating: { average: 4.7, count: 187 },
+    isFeatured: true,
+  },
+  {
+    name: 'Running Jacket Lightweight',
+    description: 'Ultra-lightweight running jacket with reflective details and water-repellent finish.',
+    price: 75,
+    originalPrice: 95,
+    category: 'Apparel',
+    subCategory: 'Jackets',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800', alt: 'Running Jacket' }
+    ],
+    colors: [
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800'] },
+      { name: 'Navy/Yellow', hex: '#000080', images: ['https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800'] }
+    ],
+    sizes: [
+      { size: 'S', stock: 12 },
+      { size: 'M', stock: 20 },
+      { size: 'L', stock: 18 },
+      { size: 'XL', stock: 10 }
+    ],
+    totalStock: 60,
+    features: ['Water-repellent', 'Reflective details', 'Packable design', 'Breathable mesh'],
+    tags: ['running', 'jacket', 'lightweight', 'outdoor'],
+    rating: { average: 4.6, count: 145 },
+    isNewArrival: true,
+  },
+  {
+    name: 'Hybrid Training Shorts',
+    description: 'Versatile training shorts suitable for running, gym, or casual wear with quick-dry fabric.',
+    price: 35,
+    category: 'Apparel',
+    subCategory: 'Shorts',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800', alt: 'Training Shorts' }
+    ],
+    colors: [
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800'] },
+      { name: 'Navy', hex: '#000080', images: ['https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800'] },
+      { name: 'Gray', hex: '#808080', images: ['https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800'] }
+    ],
+    sizes: [
+      { size: 'S', stock: 20 },
+      { size: 'M', stock: 30 },
+      { size: 'L', stock: 25 },
+      { size: 'XL', stock: 15 }
+    ],
+    totalStock: 90,
+    features: ['Quick-dry fabric', 'Zippered pocket', 'Elastic waistband', '7-inch inseam'],
+    tags: ['shorts', 'training', 'versatile', 'hybrid'],
+    rating: { average: 4.5, count: 178 },
+  },
+  {
+    name: 'Cricket Batting Gloves Pro',
+    description: 'Professional-grade batting gloves with superior protection and grip for enhanced performance.',
+    price: 55,
+    category: 'Sports',
+    subCategory: 'Cricket',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800', alt: 'Cricket Gloves' }
+    ],
+    colors: [
+      { name: 'White/Blue', hex: '#FFFFFF', images: ['https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800'] }
+    ],
+    sizes: [
+      { size: 'Small', stock: 10 },
+      { size: 'Medium', stock: 20 },
+      { size: 'Large', stock: 15 }
+    ],
+    totalStock: 45,
+    features: ['Multi-layer protection', 'Premium leather palm', 'Ventilated mesh', 'Adjustable wrist strap'],
+    tags: ['cricket', 'gloves', 'batting', 'sports'],
+    rating: { average: 4.8, count: 112 },
+  },
+  {
+    name: 'Golf Performance Polo',
+    description: 'Moisture-wicking polo shirt designed for golf with UV protection and stretch fabric.',
+    price: 55,
+    originalPrice: 70,
+    category: 'Apparel',
+    subCategory: 'Polo Shirts',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800', alt: 'Golf Polo' }
+    ],
+    colors: [
+      { name: 'Navy', hex: '#000080', images: ['https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800'] },
+      { name: 'White', hex: '#FFFFFF', images: ['https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800'] },
+      { name: 'Gray', hex: '#808080', images: ['https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800'] }
+    ],
+    sizes: [
+      { size: 'S', stock: 15 },
+      { size: 'M', stock: 25 },
+      { size: 'L', stock: 20 },
+      { size: 'XL', stock: 10 }
+    ],
+    totalStock: 70,
+    features: ['Moisture-wicking', 'UV protection UPF 40+', '4-way stretch', 'dryCELL technology'],
+    tags: ['golf', 'polo', 'performance', 'sports'],
+    rating: { average: 4.7, count: 156 },
+  },
+  {
+    name: 'Gymduffle Pro Holdall',
+    description: 'Premium gym holdall with multiple compartments including ventilated shoe pocket and water bottle holder.',
+    price: 70,
+    originalPrice: 85,
+    category: 'Accessories',
+    subCategory: 'Bags',
+    gender: 'Unisex',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800', alt: 'Gym Holdall' }
+    ],
+    colors: [
+      { name: 'Black/Red', hex: '#000000', images: ['https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800'] },
+      { name: 'Gray/Blue', hex: '#808080', images: ['https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800'] }
+    ],
+    sizes: [
+      { size: 'Medium (45L)', stock: 20 },
+      { size: 'Large (65L)', stock: 15 }
+    ],
+    totalStock: 35,
+    features: ['Ventilated shoe compartment', 'Water bottle holder', 'Padded shoulder strap', 'Durable ripstop fabric'],
+    tags: ['gym', 'bag', 'holdall', 'sports'],
+    rating: { average: 4.8, count: 267 },
+    isFeatured: true,
+  },
+  {
+    name: 'Tennis Racket Club Series',
+    description: 'Perfect racket for intermediate players with excellent power and control balance.',
+    price: 95,
+    category: 'Sports',
+    subCategory: 'Tennis',
+    gender: 'Unisex',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1617083279887-34e08d7cf013?w=800', alt: 'Tennis Racket' }
+    ],
+    colors: [
+      { name: 'Black/Green', hex: '#000000', images: ['https://images.unsplash.com/photo-1617083279887-34e08d7cf013?w=800'] }
+    ],
+    sizes: [
+      { size: 'Grip 2', stock: 8 },
+      { size: 'Grip 3', stock: 15 },
+      { size: 'Grip 4', stock: 12 }
+    ],
+    totalStock: 35,
+    features: ['100 sq in head size', 'Pre-strung', 'Graphite composite', 'Power and control balance'],
+    tags: ['tennis', 'racket', 'sports', 'intermediate'],
+    rating: { average: 4.6, count: 89 },
+  },
+  {
+    name: 'Resistance Bands Set',
+    description: 'Complete resistance training set with 5 bands of varying resistance levels and accessories.',
+    price: 32,
+    category: 'Sports',
+    subCategory: 'Fitness',
+    gender: 'Unisex',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800', alt: 'Resistance Bands' }
+    ],
+    colors: [
+      { name: 'Multi', hex: '#FF0000', images: ['https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800'] }
+    ],
+    sizes: [
+      { size: 'One Size', stock: 60 }
+    ],
+    totalStock: 60,
+    features: ['5 resistance levels', 'Door anchor included', 'Handles and ankle straps', 'Carrying bag'],
+    tags: ['fitness', 'resistance', 'training', 'home-gym'],
+    rating: { average: 4.7, count: 345 },
+    isBestseller: true,
+  },
+  {
+    name: 'Jump Rope Speed Pro',
+    description: 'Professional speed jump rope with ball bearings for smooth rotation and adjustable length.',
+    price: 18,
+    category: 'Sports',
+    subCategory: 'Fitness',
+    gender: 'Unisex',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800', alt: 'Jump Rope' }
+    ],
+    colors: [
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800'] },
+      { name: 'Red', hex: '#FF0000', images: ['https://images.unsplash.com/photo-1598289431512-b97b0917affc?w=800'] }
+    ],
+    sizes: [
+      { size: 'Adjustable', stock: 80 }
+    ],
+    totalStock: 80,
+    features: ['Ball bearing system', 'Adjustable length', 'Anti-slip handles', 'Speed cable'],
+    tags: ['jump-rope', 'fitness', 'cardio', 'training'],
+    rating: { average: 4.6, count: 289 },
+  },
+  {
+    name: 'Shin Guards Pro',
+    description: 'Professional football shin guards with anatomical design and reinforced protection.',
+    price: 28,
+    category: 'Sports',
+    subCategory: 'Football',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800', alt: 'Shin Guards' }
+    ],
+    colors: [
+      { name: 'Black/White', hex: '#000000', images: ['https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800'] }
+    ],
+    sizes: [
+      { size: 'Small', stock: 15 },
+      { size: 'Medium', stock: 25 },
+      { size: 'Large', stock: 20 }
+    ],
+    totalStock: 60,
+    features: ['Anatomical design', 'Reinforced protection', 'Compression sleeve', 'Lightweight'],
+    tags: ['football', 'soccer', 'shin-guards', 'protection'],
+    rating: { average: 4.5, count: 198 },
+  },
+  {
+    name: 'Goalkeeper Gloves Grip Pro',
+    description: 'Professional goalkeeper gloves with superior grip and finger protection technology.',
+    price: 48,
+    category: 'Sports',
+    subCategory: 'Football',
+    gender: 'Men',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800', alt: 'Goalkeeper Gloves' }
+    ],
+    colors: [
+      { name: 'Yellow/Black', hex: '#FFFF00', images: ['https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800'] },
+      { name: 'Orange/Blue', hex: '#FFA500', images: ['https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800'] }
+    ],
+    sizes: [
+      { size: '7', stock: 10 },
+      { size: '8', stock: 15 },
+      { size: '9', stock: 18 },
+      { size: '10', stock: 12 }
+    ],
+    totalStock: 55,
+    features: ['4mm latex foam', 'Finger protection', 'Wrist support', 'All-weather grip'],
+    tags: ['football', 'goalkeeper', 'gloves', 'soccer'],
+    rating: { average: 4.8, count: 167 },
+    isFeatured: true,
+  },
+  {
+    name: 'Running Armband Phone Holder',
+    description: 'Secure phone armband for running with water-resistant design and touch-screen compatible.',
+    price: 16,
+    category: 'Accessories',
+    subCategory: 'Phone Holders',
+    gender: 'Unisex',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800', alt: 'Phone Armband' }
+    ],
+    colors: [
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800'] }
+    ],
+    sizes: [
+      { size: 'Universal', stock: 100 }
+    ],
+    totalStock: 100,
+    features: ['Water-resistant', 'Touch-screen compatible', 'Adjustable strap', 'Key holder'],
+    tags: ['running', 'armband', 'phone', 'accessories'],
+    rating: { average: 4.5, count: 412 },
+  },
+  {
+    name: 'Cooling Towel Sport',
+    description: 'Instant cooling towel perfect for workouts, running, and outdoor activities.',
+    price: 12,
+    category: 'Accessories',
+    subCategory: 'Towels',
+    gender: 'Unisex',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800', alt: 'Cooling Towel' }
+    ],
+    colors: [
+      { name: 'Blue', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800'] },
+      { name: 'Gray', hex: '#808080', images: ['https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800'] },
+      { name: 'Pink', hex: '#FFC0CB', images: ['https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800'] }
+    ],
+    sizes: [
+      { size: '30x90cm', stock: 120 }
+    ],
+    totalStock: 120,
+    features: ['Instant cooling', 'Ultra-absorbent', 'Quick-dry', 'Reusable'],
+    tags: ['towel', 'cooling', 'sports', 'workout'],
+    rating: { average: 4.6, count: 567 },
+  },
+  // Kids Section - Shoes
+  {
+    name: 'Kids Suede Classic',
+    description: 'Iconic PUMA Suede Classic scaled down for kids. Premium suede with comfortable fit for all-day play.',
+    price: 45,
+    originalPrice: 55,
+    category: 'Shoes',
+    subCategory: 'Sneakers',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800', alt: 'Kids Suede Classic' }
+    ],
+    colors: [
+      { name: 'Blue', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'] },
+      { name: 'Pink', hex: '#FFC0CB', images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'] },
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'] }
+    ],
+    sizes: [
+      { size: '10K', stock: 20 },
+      { size: '11K', stock: 25 },
+      { size: '12K', stock: 30 },
+      { size: '13K', stock: 25 },
+      { size: '1Y', stock: 20 },
+      { size: '2Y', stock: 15 }
+    ],
+    totalStock: 135,
+    features: ['Premium suede upper', 'Comfortable footbed', 'Durable rubber outsole', 'Easy velcro closure'],
+    tags: ['kids', 'sneakers', 'classic', 'casual'],
+    rating: { average: 4.8, count: 312 },
+    isFeatured: true,
+    isBestseller: true,
+  },
+  {
+    name: 'Kids RS-X Fun',
+    description: 'Bold and colorful RS-X design for kids who love to stand out. Chunky sole for comfort and style.',
+    price: 55,
+    originalPrice: 70,
+    category: 'Shoes',
+    subCategory: 'Sneakers',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800', alt: 'Kids RS-X Fun' }
+    ],
+    colors: [
+      { name: 'Multi-Color', hex: '#FF0000', images: ['https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800'] },
+      { name: 'Blue/Yellow', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800'] }
+    ],
+    sizes: [
+      { size: '11K', stock: 15 },
+      { size: '12K', stock: 20 },
+      { size: '13K', stock: 20 },
+      { size: '1Y', stock: 15 },
+      { size: '2Y', stock: 10 }
+    ],
+    totalStock: 80,
+    features: ['Chunky RS design', 'Colorful details', 'Padded collar', 'Hook-and-loop closure'],
+    tags: ['kids', 'sneakers', 'colorful', 'rs-x'],
+    rating: { average: 4.7, count: 198 },
+    isNewArrival: true,
+    isFeatured: true,
+  },
+  {
+    name: 'Kids Future Football Boots',
+    description: 'Junior football boots designed for young players to develop their skills with confidence.',
+    price: 60,
+    category: 'Sports',
+    subCategory: 'Football',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=800', alt: 'Kids Football Boots' }
+    ],
+    colors: [
+      { name: 'Blue/Orange', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=800'] },
+      { name: 'Black/Yellow', hex: '#000000', images: ['https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=800'] }
+    ],
+    sizes: [
+      { size: '10K', stock: 12 },
+      { size: '11K', stock: 15 },
+      { size: '12K', stock: 18 },
+      { size: '13K', stock: 15 },
+      { size: '1Y', stock: 12 },
+      { size: '2Y', stock: 8 }
+    ],
+    totalStock: 80,
+    features: ['Grippy outsole', 'Durable synthetic upper', 'Comfortable fit', 'Youth-specific design'],
+    tags: ['kids', 'football', 'soccer', 'sports'],
+    rating: { average: 4.6, count: 145 },
+    isBestseller: true,
+  },
+  {
+    name: 'Kids Running Shoes Velocity',
+    description: 'Lightweight running shoes for active kids with cushioned support and breathable mesh.',
+    price: 50,
+    originalPrice: 65,
+    category: 'Shoes',
+    subCategory: 'Running',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800', alt: 'Kids Running Shoes' }
+    ],
+    colors: [
+      { name: 'Pink/Purple', hex: '#FFC0CB', images: ['https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800'] },
+      { name: 'Blue/Green', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800'] }
+    ],
+    sizes: [
+      { size: '10K', stock: 15 },
+      { size: '11K', stock: 20 },
+      { size: '12K', stock: 22 },
+      { size: '13K', stock: 18 },
+      { size: '1Y', stock: 15 },
+      { size: '2Y', stock: 10 }
+    ],
+    totalStock: 100,
+    features: ['Lightweight design', 'Breathable mesh', 'Cushioned midsole', 'Easy on/off'],
+    tags: ['kids', 'running', 'sports', 'active'],
+    rating: { average: 4.7, count: 234 },
+    isNewArrival: true,
+  },
+  // Kids Apparel
+  {
+    name: 'Kids Essential Logo T-Shirt',
+    description: 'Comfortable cotton t-shirt with PUMA Cat logo. Perfect for everyday wear and play.',
+    price: 18,
+    category: 'Apparel',
+    subCategory: 'T-Shirts',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800', alt: 'Kids Logo Tee' }
+    ],
+    colors: [
+      { name: 'Red', hex: '#FF0000', images: ['https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800'] },
+      { name: 'Blue', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800'] },
+      { name: 'Pink', hex: '#FFC0CB', images: ['https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800'] },
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800'] }
+    ],
+    sizes: [
+      { size: '4-5Y', stock: 30 },
+      { size: '6-7Y', stock: 35 },
+      { size: '8-9Y', stock: 35 },
+      { size: '10-11Y', stock: 30 },
+      { size: '12-13Y', stock: 25 }
+    ],
+    totalStock: 155,
+    features: ['100% Cotton', 'PUMA Cat logo', 'Crew neck', 'Regular fit'],
+    tags: ['kids', 'tshirt', 'casual', 'logo'],
+    rating: { average: 4.8, count: 456 },
+    isBestseller: true,
+  },
+  {
+    name: 'Kids Training Shorts Active',
+    description: 'Lightweight sports shorts with moisture-wicking fabric for active kids.',
+    price: 22,
+    category: 'Apparel',
+    subCategory: 'Shorts',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800', alt: 'Kids Shorts' }
+    ],
+    colors: [
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800'] },
+      { name: 'Navy', hex: '#000080', images: ['https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800'] },
+      { name: 'Red', hex: '#FF0000', images: ['https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=800'] }
+    ],
+    sizes: [
+      { size: '4-5Y', stock: 25 },
+      { size: '6-7Y', stock: 30 },
+      { size: '8-9Y', stock: 30 },
+      { size: '10-11Y', stock: 25 },
+      { size: '12-13Y', stock: 20 }
+    ],
+    totalStock: 130,
+    features: ['Moisture-wicking', 'Elastic waistband', 'Side pockets', 'Breathable'],
+    tags: ['kids', 'shorts', 'sports', 'active'],
+    rating: { average: 4.6, count: 289 },
+  },
+  {
+    name: 'Kids Zip Hoodie Essential',
+    description: 'Cozy fleece hoodie with full zip and iconic PUMA branding. Perfect for layering.',
+    price: 40,
+    originalPrice: 50,
+    category: 'Apparel',
+    subCategory: 'Hoodies',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800', alt: 'Kids Hoodie' }
+    ],
+    colors: [
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800'] },
+      { name: 'Gray', hex: '#808080', images: ['https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800'] },
+      { name: 'Navy', hex: '#000080', images: ['https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800'] }
+    ],
+    sizes: [
+      { size: '4-5Y', stock: 20 },
+      { size: '6-7Y', stock: 25 },
+      { size: '8-9Y', stock: 25 },
+      { size: '10-11Y', stock: 20 },
+      { size: '12-13Y', stock: 15 }
+    ],
+    totalStock: 105,
+    features: ['Soft fleece', 'Full zip', 'Hood with drawcord', 'Kangaroo pocket'],
+    tags: ['kids', 'hoodie', 'casual', 'comfort'],
+    rating: { average: 4.7, count: 345 },
+    isFeatured: true,
+  },
+  {
+    name: 'Kids Track Jacket Retro',
+    description: 'Classic track jacket with retro PUMA styling and comfortable fit for young athletes.',
+    price: 45,
+    originalPrice: 60,
+    category: 'Apparel',
+    subCategory: 'Jackets',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800', alt: 'Kids Track Jacket' }
+    ],
+    colors: [
+      { name: 'Black/White', hex: '#000000', images: ['https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800'] },
+      { name: 'Navy/Red', hex: '#000080', images: ['https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800'] }
+    ],
+    sizes: [
+      { size: '4-5Y', stock: 15 },
+      { size: '6-7Y', stock: 20 },
+      { size: '8-9Y', stock: 20 },
+      { size: '10-11Y', stock: 15 },
+      { size: '12-13Y', stock: 10 }
+    ],
+    totalStock: 80,
+    features: ['Full zip', 'Side pockets', 'Ribbed cuffs', 'Retro design'],
+    tags: ['kids', 'jacket', 'retro', 'sporty'],
+    rating: { average: 4.8, count: 178 },
+    isNewArrival: true,
+  },
+  {
+    name: 'Kids Joggers Fleece',
+    description: 'Comfortable fleece joggers perfect for casual wear and light activities.',
+    price: 35,
+    category: 'Apparel',
+    subCategory: 'Pants',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800', alt: 'Kids Joggers' }
+    ],
+    colors: [
+      { name: 'Gray', hex: '#808080', images: ['https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800'] },
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800'] },
+      { name: 'Navy', hex: '#000080', images: ['https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=800'] }
+    ],
+    sizes: [
+      { size: '4-5Y', stock: 20 },
+      { size: '6-7Y', stock: 25 },
+      { size: '8-9Y', stock: 25 },
+      { size: '10-11Y', stock: 20 },
+      { size: '12-13Y', stock: 15 }
+    ],
+    totalStock: 105,
+    features: ['Soft fleece', 'Elastic waistband', 'Side pockets', 'Tapered fit'],
+    tags: ['kids', 'pants', 'joggers', 'comfort'],
+    rating: { average: 4.7, count: 267 },
+  },
+  // Kids Accessories
+  {
+    name: 'Kids Backpack Phase',
+    description: 'Durable backpack perfect for school with multiple compartments and padded straps.',
+    price: 30,
+    category: 'Accessories',
+    subCategory: 'Bags',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800', alt: 'Kids Backpack' }
+    ],
+    colors: [
+      { name: 'Blue', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800'] },
+      { name: 'Pink', hex: '#FFC0CB', images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800'] },
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800'] }
+    ],
+    sizes: [
+      { size: 'One Size', stock: 100 }
+    ],
+    totalStock: 100,
+    features: ['Multiple compartments', 'Padded shoulder straps', 'Water-resistant', 'Laptop sleeve'],
+    tags: ['kids', 'backpack', 'school', 'bags'],
+    rating: { average: 4.8, count: 423 },
+    isBestseller: true,
+  },
+  {
+    name: 'Kids Cap Essential',
+    description: 'Adjustable baseball cap with PUMA branding, perfect for sunny days.',
+    price: 15,
+    category: 'Accessories',
+    subCategory: 'Caps',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800', alt: 'Kids Cap' }
+    ],
+    colors: [
+      { name: 'Red', hex: '#FF0000', images: ['https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800'] },
+      { name: 'Blue', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800'] },
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800'] }
+    ],
+    sizes: [
+      { size: 'Youth', stock: 150 }
+    ],
+    totalStock: 150,
+    features: ['Adjustable strap', 'Embroidered logo', 'Curved brim', 'UV protection'],
+    tags: ['kids', 'cap', 'accessories', 'hat'],
+    rating: { average: 4.6, count: 312 },
+  },
+  {
+    name: 'Kids Sport Socks 3-Pack',
+    description: 'Comfortable sport socks with arch support and PUMA branding. Pack of 3 pairs.',
+    price: 12,
+    category: 'Accessories',
+    subCategory: 'Socks',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=800', alt: 'Kids Socks' }
+    ],
+    colors: [
+      { name: 'White', hex: '#FFFFFF', images: ['https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=800'] },
+      { name: 'Black', hex: '#000000', images: ['https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=800'] },
+      { name: 'Multi', hex: '#FF0000', images: ['https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?w=800'] }
+    ],
+    sizes: [
+      { size: 'Small (9-12)', stock: 80 },
+      { size: 'Medium (13-3)', stock: 90 },
+      { size: 'Large (4-6)', stock: 70 }
+    ],
+    totalStock: 240,
+    features: ['3-pack', 'Arch support', 'Moisture-wicking', 'Cushioned sole'],
+    tags: ['kids', 'socks', 'accessories', '3-pack'],
+    rating: { average: 4.7, count: 512 },
+    isBestseller: true,
+  },
+  {
+    name: 'Kids Mini Football',
+    description: 'Size 3 training football perfect for young players learning the game.',
+    price: 20,
+    category: 'Sports',
+    subCategory: 'Football',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=800', alt: 'Kids Football' }
+    ],
+    colors: [
+      { name: 'Red/White', hex: '#FF0000', images: ['https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=800'] },
+      { name: 'Blue/Yellow', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=800'] }
+    ],
+    sizes: [
+      { size: 'Size 3', stock: 80 }
+    ],
+    totalStock: 80,
+    features: ['Size 3', 'Durable construction', 'Machine-stitched', 'Youth design'],
+    tags: ['kids', 'football', 'soccer', 'sports'],
+    rating: { average: 4.7, count: 198 },
+  },
+  {
+    name: 'Kids Basketball Mini',
+    description: 'Youth-sized basketball perfect for developing skills and having fun.',
+    price: 22,
+    category: 'Sports',
+    subCategory: 'Basketball',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800', alt: 'Kids Basketball' }
+    ],
+    colors: [
+      { name: 'Orange/Black', hex: '#FF6347', images: ['https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800'] }
+    ],
+    sizes: [
+      { size: 'Size 5', stock: 60 }
+    ],
+    totalStock: 60,
+    features: ['Youth size 5', 'Rubber cover', 'Good grip', 'Indoor/Outdoor'],
+    tags: ['kids', 'basketball', 'sports', 'ball'],
+    rating: { average: 4.6, count: 145 },
+  },
+  {
+    name: 'Kids Water Bottle Sport',
+    description: 'BPA-free water bottle with fun design and easy-to-use spout for active kids.',
+    price: 12,
+    category: 'Accessories',
+    subCategory: 'Bottles',
+    gender: 'Kids',
+    images: [
+      { url: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800', alt: 'Kids Water Bottle' }
+    ],
+    colors: [
+      { name: 'Blue', hex: '#0000FF', images: ['https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800'] },
+      { name: 'Pink', hex: '#FFC0CB', images: ['https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800'] },
+      { name: 'Green', hex: '#00FF00', images: ['https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=800'] }
+    ],
+    sizes: [
+      { size: '500ml', stock: 120 }
+    ],
+    totalStock: 120,
+    features: ['BPA-free', 'Leak-proof', '500ml capacity', 'Easy-grip design'],
+    tags: ['kids', 'bottle', 'hydration', 'sports'],
+    rating: { average: 4.8, count: 389 },
+  },
 ];
 
 const seedDatabase = async () => {

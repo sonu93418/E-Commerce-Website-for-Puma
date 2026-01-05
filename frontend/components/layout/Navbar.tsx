@@ -47,9 +47,8 @@ export default function Navbar() {
     { href: '/', label: 'Home' },
     { href: '/men', label: 'Men' },
     { href: '/women', label: 'Women' },
+    { href: '/kids', label: 'Kids' },
     { href: '/sports', label: 'Sports' },
-    { href: '/products?gender=Kids', label: 'Kids' },
-    { href: '/products?discount=true', label: 'Sale', highlight: true },
   ];
 
   return (
@@ -123,7 +122,7 @@ export default function Navbar() {
                   pathname === link.href
                     ? 'text-puma-red'
                     : 'text-gray-700 dark:text-gray-300'
-                } ${link.highlight ? 'text-puma-red font-bold animate-pulse' : ''}`}
+                }`}
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-puma-red transition-all duration-300 group-hover:w-full"></span>
@@ -292,10 +291,9 @@ export default function Navbar() {
                       pathname === link.href
                         ? 'text-puma-red'
                         : 'text-gray-700 dark:text-gray-300'
-                    } ${link.highlight ? 'text-puma-red font-bold' : ''}`}
+                    }`}
                   >
                     {link.label}
-                    {link.highlight && <span className="ml-2 text-xs">🔥</span>}
                   </Link>
                 ))}
               </div>

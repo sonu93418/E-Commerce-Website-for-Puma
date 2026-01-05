@@ -4,6 +4,21 @@ import { protect, admin } from '../middleware/auth.js';
 
 const router = express.Router();
 
+// @route   GET /api/products/test-kids
+// @desc    Test endpoint to check kids products
+// @access  Public
+router.get('/test-kids', async (req, res) => {
+  try {
+    const kidsProducts = await Product.find({ gender: 'Kids' });
+    res.json({
+      count: kidsProducts.length,
+      products: kidsProducts.map(p => ({ id: p._id, name: p.name, gender: p.gender, category: p.category }))
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // @route   GET /api/products
 // @desc    Get all products with filters
 // @access  Public

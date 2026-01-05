@@ -9,24 +9,31 @@ export default function CategoryShowcase() {
   const categories = [
     {
       id: 1,
-      name: 'Shoes',
-      description: 'Performance footwear for every sport',
+      name: 'Men',
+      description: 'Performance gear for athletes',
       image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800',
-      href: '/products?category=Shoes',
+      href: '/men',
     },
     {
       id: 2,
-      name: 'Apparel',
-      description: 'Premium sportswear and lifestyle clothing',
+      name: 'Women',
+      description: 'Style meets performance',
       image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800',
-      href: '/products?category=Apparel',
+      href: '/women',
     },
     {
       id: 3,
-      name: 'Accessories',
-      description: 'Complete your athletic look',
-      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800',
-      href: '/products?category=Accessories',
+      name: 'Kids',
+      description: 'Fun and comfortable designs',
+      image: 'https://images.unsplash.com/photo-1503944583220-79d8926ad5e2?w=800',
+      href: '/kids',
+    },
+    {
+      id: 4,
+      name: 'Sports',
+      description: 'Equipment for every game',
+      image: 'https://images.unsplash.com/photo-1579338559194-a162d19bf842?w=800',
+      href: '/sports',
     },
   ];
 
@@ -55,7 +62,7 @@ export default function CategoryShowcase() {
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category, index) => (
             <motion.div
               key={category.id}
@@ -67,7 +74,7 @@ export default function CategoryShowcase() {
               <Link href={category.href}>
                 <motion.div
                   whileHover={{ y: -10 }}
-                  className="group relative h-[500px] rounded-2xl overflow-hidden cursor-pointer"
+                  className="group relative h-[400px] rounded-2xl overflow-hidden cursor-pointer"
                 >
                   {/* Image */}
                   <div className="absolute inset-0">

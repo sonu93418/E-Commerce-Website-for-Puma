@@ -5,12 +5,29 @@ import { useEffect, useState, useRef } from 'react';
 import { gsap } from 'gsap';
 
 export default function WelcomeScreen() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const [shouldShow, setShouldShow] = useState(false);
   const logoRef = useRef<HTMLDivElement>(null);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
+    // Check if welcome screen has been shown before
+    const hasSeenWelcome = sessionStorage.getItem('hasSeenWelcome');
+    
+    if (!hasSeenWelcome) {
+      setShouldShow(true);
+      setIsVisible(true);
+      sessionStorage.setItem('hasSeenWelcome', 'true');
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!shouldShow || !isVisible || hasAnimated.current) return;
+
     // GSAP animation for logo reveal
     if (logoRef.current) {
+      hasAnimated.current = true;
+      
       gsap.fromTo(
         logoRef.current,
         {
@@ -29,22 +46,28 @@ export default function WelcomeScreen() {
       );
     }
 
-    // Hide welcome screen after 1 second
+    // Hide welcome screen after animation completes
+    // Text animation: 1.5s duration * 2 repeats + delays = ~5s
+    // Logo animation: 0.5s delay + 1.5s duration = 2s
+    // Exit animation: 0.8s
+    // Total: ~5.8s for smooth transition
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 1000);
+    }, 5800);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [shouldShow, isVisible]);
+
+  if (!shouldShow) return null;
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isVisible && (
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-transparent overflow-hidden"
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-black overflow-hidden"
         >
           {/* Alternating Black and White Stripes */}
           <div className="absolute left-0 right-0 top-[15%] bottom-[15%]">
@@ -62,7 +85,7 @@ export default function WelcomeScreen() {
                     duration: 1.5,
                     repeat: 2,
                     ease: 'linear',
-                    delay: i * 0.1,
+                    delay: i * 0.15,
                   }}
                   className="whitespace-nowrap flex"
                 >
