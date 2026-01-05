@@ -34,7 +34,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`}>
         <WelcomeScreen />
         <Navbar />
-        <main className="min-h-screen">
+        <main className="min-h-screen pt-20">
           {children}
         </main>
         <ConditionalFooter />
