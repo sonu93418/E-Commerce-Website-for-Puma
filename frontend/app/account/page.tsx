@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -32,19 +32,7 @@ export default function AccountPage() {
     router.push('/');
   };
 
-  if (!mounted || loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-gray-900 dark:border-white"></div>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return null;
-  }
-
-  const accountSections = [
+  const accountSections = useMemo(() => [
     {
       title: 'My Orders',
       description: 'Track, return, or buy again',
@@ -69,7 +57,19 @@ export default function AccountPage() {
       icon: FiMapPin,
       href: '/account/addresses',
     },
-  ];
+  ], []);
+
+  if (!mounted || loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-gray-900 dark:border-white"></div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 sm:py-12">

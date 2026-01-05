@@ -11,9 +11,14 @@ export default function WelcomeScreen() {
   const hasAnimated = useRef(false);
 
   useEffect(() => {
-    // Always show welcome animation (removed session check)
-    setShouldShow(true);
-    setIsVisible(true);
+    // Check if welcome animation has been shown in this session
+    const hasShownWelcome = sessionStorage.getItem('welcomeShown');
+    
+    if (!hasShownWelcome) {
+      setShouldShow(true);
+      setIsVisible(true);
+      sessionStorage.setItem('welcomeShown', 'true');
+    }
   }, []);
 
   useEffect(() => {
@@ -41,12 +46,19 @@ export default function WelcomeScreen() {
       );
     }
 
-    // Hide welcome screen after 1 second total
+    // Hide welcome screen after 1 second total and enable body scroll
     const timer = setTimeout(() => {
       setIsVisible(false);
+      document.body.style.overflow = 'unset';
     }, 1000);
 
-    return () => clearTimeout(timer);
+    // Prevent scrolling during animation
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      clearTimeout(timer);
+      document.body.style.overflow = 'unset';
+    };
   }, [shouldShow, isVisible]);
 
   if (!shouldShow) return null;

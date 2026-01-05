@@ -4,6 +4,8 @@ import './globals.css'
 import Navbar from '@/components/layout/Navbar'
 import ConditionalFooter from '@/components/layout/ConditionalFooter'
 import WelcomeScreen from '@/components/WelcomeScreen'
+import LoadingBar from '@/components/LoadingBar'
+import PageTransition from '@/components/PageTransition'
 import { Toaster } from 'react-hot-toast'
 
 const inter = Inter({
@@ -33,9 +35,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${montserrat.variable} font-sans antialiased`}>
         <WelcomeScreen />
+        <LoadingBar />
         <Navbar />
         <main className="min-h-screen pt-20">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
         <ConditionalFooter />
         <Toaster
