@@ -50,7 +50,7 @@ export default function CheckoutPage() {
   }, [isAuthenticated, items, router, user]);
 
   const subtotal = totalPrice;
-  const shipping = subtotal > 200000 ? 0 : 1000;
+  const shipping = subtotal > 2999 ? 0 : 99; // Free shipping above ₹2999, otherwise ₹99
   const tax = subtotal * 0.18;
   const total = subtotal + shipping + tax;
 

@@ -25,7 +25,7 @@ router.post('/', protect, async (req, res) => {
     // Calculate prices
     const itemsPrice = orderItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
     const taxPrice = itemsPrice * 0.18; // 18% GST for India
-    const shippingPrice = itemsPrice > 200000 ? 0 : 1000; // Free shipping above ₹200,000
+    const shippingPrice = itemsPrice > 2999 ? 0 : 99; // Free shipping above ₹2999, otherwise ₹99
     const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
     const order = await Order.create({

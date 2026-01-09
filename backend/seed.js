@@ -10,8 +10,8 @@ const sampleProducts = [
   {
     name: 'PUMA RS-X³ Puzzle',
     description: 'The RS-X³ Puzzle reinvents our chunky RS heritage with attitude and bold details. This version features a mixed-material upper in suede and leather, TPU cage elements, and a bold, eye-catching colorway.',
-    price: 110,
-    originalPrice: 140,
+    price: 9299,
+    originalPrice: 11999,
     discount: 21,
     category: 'Shoes',
     subCategory: 'Sneakers',
@@ -39,8 +39,8 @@ const sampleProducts = [
   {
     name: 'Speed Cat Classic',
     description: 'Inspired by racing heritage, the Speed Cat delivers sleek style with premium leather construction.',
-    price: 95,
-    originalPrice: 120,
+    price: 7999,
+    originalPrice: 9999,
     category: 'Shoes',
     subCategory: 'Sneakers',
     gender: 'Men',
@@ -65,7 +65,7 @@ const sampleProducts = [
   {
     name: 'Suede Classic XXI',
     description: 'An icon since 1968, the Suede Classic returns with premium suede and timeless style.',
-    price: 75,
+    price: 6299,
     category: 'Shoes',
     subCategory: 'Sneakers',
     gender: 'Men',
@@ -91,7 +91,7 @@ const sampleProducts = [
   {
     name: 'Essential Logo Tee',
     description: 'Simple yet bold. This essential tee features the iconic PUMA Cat logo on the chest. Made from soft cotton, it\'s perfect for everyday wear.',
-    price: 35,
+    price: 1299,
     category: 'Apparel',
     subCategory: 'T-Shirts',
     gender: 'Men',
@@ -117,8 +117,8 @@ const sampleProducts = [
   {
     name: 'Performance Training Hoodie',
     description: 'Stay warm during workouts with this technical hoodie featuring moisture-wicking fabric.',
-    price: 65,
-    originalPrice: 85,
+    price: 4995,
+    originalPrice: 6993,
     category: 'Apparel',
     subCategory: 'Hoodies',
     gender: 'Men',
@@ -142,7 +142,7 @@ const sampleProducts = [
   {
     name: 'Track Jacket Retro',
     description: 'Classic track jacket with retro styling and modern comfort.',
-    price: 80,
+    price: 6993,
     category: 'Apparel',
     subCategory: 'Jackets',
     gender: 'Men',
@@ -167,7 +167,7 @@ const sampleProducts = [
   {
     name: 'Evercat Contender Backpack',
     description: 'Carry everything you need with the Evercat Contender Backpack. Features multiple compartments, padded straps, and durable construction.',
-    price: 45,
+    price: 3493,
     category: 'Accessories',
     subCategory: 'Bags',
     gender: 'Unisex',
@@ -189,7 +189,7 @@ const sampleProducts = [
   {
     name: 'FUTURE Z 1.3 FG/AG',
     description: 'Engineered for those who shape the game. The FUTURE Z features an adaptive FUZIONFIT+ compression band and Dynamic Motion System outsole.',
-    price: 220,
+    price: 17982,
     category: 'Sports',
     subCategory: 'Football',
     gender: 'Men',
@@ -216,7 +216,7 @@ const sampleProducts = [
   {
     name: 'Velocity Nitro Running Shoes',
     description: 'Lightweight running shoes with NITRO foam for superior cushioning and energy return.',
-    price: 130,
+    price: 10989,
     category: 'Shoes',
     subCategory: 'Running',
     gender: 'Men',
@@ -241,8 +241,8 @@ const sampleProducts = [
   {
     name: 'Clyde All-Pro Basketball Shoes',
     description: 'Signature basketball shoes designed for elite performance on the court.',
-    price: 140,
-    originalPrice: 160,
+    price: 11988,
+    originalPrice: 12987,
     category: 'Shoes',
     subCategory: 'Basketball',
     gender: 'Men',
@@ -268,7 +268,7 @@ const sampleProducts = [
   {
     name: 'Training Shorts Essential',
     description: 'Lightweight training shorts with moisture-wicking fabric for maximum comfort during workouts.',
-    price: 30,
+    price: 2392,
     category: 'Apparel',
     subCategory: 'Shorts',
     gender: 'Men',
@@ -293,8 +293,8 @@ const sampleProducts = [
   {
     name: 'Essentials+ Fleece Pants',
     description: 'Comfortable fleece pants perfect for lounging or casual wear.',
-    price: 55,
-    originalPrice: 70,
+    price: 4491,
+    originalPrice: 5994,
     category: 'Apparel',
     subCategory: 'Pants',
     gender: 'Men',
@@ -320,7 +320,7 @@ const sampleProducts = [
   {
     name: 'Graphic Performance Tee',
     description: 'Bold graphic tee with dryCELL technology to keep you dry and comfortable.',
-    price: 28,
+    price: 2392,
     category: 'Apparel',
     subCategory: 'T-Shirts',
     gender: 'Men',
@@ -346,7 +346,7 @@ const sampleProducts = [
   {
     name: 'Training Cap Classic',
     description: 'Adjustable training cap with embroidered PUMA logo.',
-    price: 22,
+    price: 1794,
     category: 'Accessories',
     subCategory: 'Caps',
     gender: 'Men',
@@ -368,7 +368,7 @@ const sampleProducts = [
   {
     name: 'Sport Socks 3-Pack',
     description: 'Performance socks designed for all-day comfort with arch support and moisture-wicking properties.',
-    price: 18,
+    price: 1495,
     category: 'Accessories',
     subCategory: 'Socks',
     gender: 'Men',
@@ -392,8 +392,8 @@ const sampleProducts = [
   {
     name: 'Gym Duffle Bag',
     description: 'Spacious duffle bag perfect for gym sessions with multiple compartments and water-resistant material.',
-    price: 60,
-    originalPrice: 75,
+    price: 4990,
+    originalPrice: 5994,
     category: 'Accessories',
     subCategory: 'Bags',
     gender: 'Men',
@@ -415,7 +415,7 @@ const sampleProducts = [
   {
     name: 'One8 Cricket Bat English Willow',
     description: 'Premium cricket bat endorsed by Virat Kohli, made from the finest English willow.',
-    price: 180,
+    price: 14985,
     category: 'Sports',
     subCategory: 'Cricket',
     gender: 'Men',
@@ -438,7 +438,7 @@ const sampleProducts = [
   {
     name: 'Football Training Ball',
     description: 'Official size 5 training football with superior durability and flight characteristics.',
-    price: 35,
+    price: 2990,
     category: 'Sports',
     subCategory: 'Football',
     gender: 'Men',
@@ -459,8 +459,8 @@ const sampleProducts = [
   {
     name: 'Deviate Nitro Elite Running Shoes',
     description: 'Elite racing shoes with carbon fiber plate for maximum energy return.',
-    price: 200,
-    originalPrice: 230,
+    price: 16983,
+    originalPrice: 18981,
     category: 'Shoes',
     subCategory: 'Running',
     gender: 'Men',
@@ -486,7 +486,7 @@ const sampleProducts = [
   {
     name: 'Ultra Pro FG Football Boots',
     description: 'Lightweight football boots designed for speed with GripControl coating.',
-    price: 150,
+    price: 11988,
     category: 'Shoes',
     subCategory: 'Football',
     gender: 'Men',
@@ -510,8 +510,8 @@ const sampleProducts = [
   {
     name: 'Training Joggers Tech',
     description: 'Technical joggers with dryCELL moisture-wicking technology for intense workouts.',
-    price: 60,
-    originalPrice: 75,
+    price: 4990,
+    originalPrice: 5994,
     category: 'Apparel',
     subCategory: 'Pants',
     gender: 'Men',
@@ -537,7 +537,7 @@ const sampleProducts = [
   {
     name: 'Essential Training Tank',
     description: 'Breathable tank top perfect for high-intensity training sessions.',
-    price: 25,
+    price: 2093,
     category: 'Apparel',
     subCategory: 'T-Shirts',
     gender: 'Men',
@@ -563,8 +563,8 @@ const sampleProducts = [
   {
     name: 'Windbreaker Jacket',
     description: 'Lightweight windbreaker with water-resistant finish for outdoor training.',
-    price: 90,
-    originalPrice: 110,
+    price: 6993,
+    originalPrice: 8991,
     category: 'Apparel',
     subCategory: 'Jackets',
     gender: 'Men',
@@ -589,7 +589,7 @@ const sampleProducts = [
   {
     name: 'Compression Long Sleeve Shirt',
     description: 'Compression fit shirt designed to enhance performance and reduce muscle fatigue.',
-    price: 45,
+    price: 3493,
     category: 'Apparel',
     subCategory: 'T-Shirts',
     gender: 'Men',
@@ -613,7 +613,7 @@ const sampleProducts = [
   {
     name: 'Running Belt Waist Pack',
     description: 'Lightweight running belt with multiple pockets for essentials.',
-    price: 28,
+    price: 2392,
     category: 'Accessories',
     subCategory: 'Bags',
     gender: 'Men',
@@ -634,7 +634,7 @@ const sampleProducts = [
   {
     name: 'Training Gloves Pro',
     description: 'Professional training gloves with enhanced grip and wrist support.',
-    price: 35,
+    price: 2990,
     category: 'Accessories',
     subCategory: 'Gloves',
     gender: 'Men',
@@ -658,7 +658,7 @@ const sampleProducts = [
   {
     name: 'Water Bottle Sport 750ml',
     description: 'BPA-free sport water bottle with ergonomic design and leak-proof cap.',
-    price: 15,
+    price: 1196,
     category: 'Accessories',
     subCategory: 'Bottles',
     gender: 'Men',
@@ -681,7 +681,7 @@ const sampleProducts = [
   {
     name: 'Basketball',
     description: 'Official size basketball with superior grip and durability.',
-    price: 40,
+    price: 3493,
     category: 'Sports',
     subCategory: 'Basketball',
     gender: 'Men',
@@ -702,7 +702,7 @@ const sampleProducts = [
   {
     name: 'Yoga Mat Performance',
     description: 'Premium yoga mat with excellent grip and cushioning for all workout types.',
-    price: 50,
+    price: 3992,
     category: 'Sports',
     subCategory: 'Fitness',
     gender: 'Men',
@@ -726,8 +726,8 @@ const sampleProducts = [
   {
     name: 'PUMA King Platinum FG Football Boots',
     description: 'Premium leather football boots with K-BETTER technology for ultimate touch and comfort. Designed for playmakers who control the game.',
-    price: 190,
-    originalPrice: 220,
+    price: 15984,
+    originalPrice: 17982,
     category: 'Sports',
     subCategory: 'Football',
     gender: 'Men',
@@ -755,7 +755,7 @@ const sampleProducts = [
   {
     name: 'Ignite Pwradapt Golf Shoes',
     description: 'Revolutionary golf shoes with Pwradapt technology for superior stability and comfort on the course.',
-    price: 175,
+    price: 14985,
     category: 'Sports',
     subCategory: 'Golf',
     gender: 'Men',
@@ -781,7 +781,7 @@ const sampleProducts = [
   {
     name: 'Active Gaming Footwear',
     description: 'The world\'s first gaming footwear designed in collaboration with esports professionals for ultimate comfort during long gaming sessions.',
-    price: 110,
+    price: 8991,
     category: 'Shoes',
     subCategory: 'Sneakers',
     gender: 'Men',
@@ -808,7 +808,7 @@ const sampleProducts = [
   {
     name: 'One8 Cricket Shoes Spike',
     description: 'High-performance cricket shoes designed with Virat Kohli for exceptional grip and support on the pitch.',
-    price: 125,
+    price: 9990,
     category: 'Sports',
     subCategory: 'Cricket',
     gender: 'Men',
@@ -834,7 +834,7 @@ const sampleProducts = [
   {
     name: 'Tennis Training Ball - 3 Pack',
     description: 'ITF approved tennis balls with superior durability and consistent bounce for all court surfaces.',
-    price: 12,
+    price: 995,
     category: 'Sports',
     subCategory: 'Tennis',
     gender: 'Unisex',
@@ -855,8 +855,8 @@ const sampleProducts = [
   {
     name: 'Badminton Racket Pro Series',
     description: 'Lightweight badminton racket with carbon fiber construction for power and precision.',
-    price: 85,
-    originalPrice: 100,
+    price: 6993,
+    originalPrice: 7992,
     category: 'Sports',
     subCategory: 'Badminton',
     gender: 'Unisex',
@@ -879,8 +879,8 @@ const sampleProducts = [
   {
     name: 'Netfit Training Shoes',
     description: 'Revolutionary training shoes with NETFIT lacing system for customizable fit and support.',
-    price: 95,
-    originalPrice: 120,
+    price: 7992,
+    originalPrice: 9990,
     category: 'Shoes',
     subCategory: 'Training',
     gender: 'Men',
@@ -907,8 +907,8 @@ const sampleProducts = [
   {
     name: 'Running Jacket Lightweight',
     description: 'Ultra-lightweight running jacket with reflective details and water-repellent finish.',
-    price: 75,
-    originalPrice: 95,
+    price: 5994,
+    originalPrice: 7992,
     category: 'Apparel',
     subCategory: 'Jackets',
     gender: 'Men',
@@ -934,7 +934,7 @@ const sampleProducts = [
   {
     name: 'Hybrid Training Shorts',
     description: 'Versatile training shorts suitable for running, gym, or casual wear with quick-dry fabric.',
-    price: 35,
+    price: 2990,
     category: 'Apparel',
     subCategory: 'Shorts',
     gender: 'Men',
@@ -960,7 +960,7 @@ const sampleProducts = [
   {
     name: 'Cricket Batting Gloves Pro',
     description: 'Professional-grade batting gloves with superior protection and grip for enhanced performance.',
-    price: 55,
+    price: 4491,
     category: 'Sports',
     subCategory: 'Cricket',
     gender: 'Men',
@@ -983,8 +983,8 @@ const sampleProducts = [
   {
     name: 'Golf Performance Polo',
     description: 'Moisture-wicking polo shirt designed for golf with UV protection and stretch fabric.',
-    price: 55,
-    originalPrice: 70,
+    price: 4491,
+    originalPrice: 5994,
     category: 'Apparel',
     subCategory: 'Polo Shirts',
     gender: 'Men',
@@ -1010,8 +1010,8 @@ const sampleProducts = [
   {
     name: 'Gymduffle Pro Holdall',
     description: 'Premium gym holdall with multiple compartments including ventilated shoe pocket and water bottle holder.',
-    price: 70,
-    originalPrice: 85,
+    price: 5994,
+    originalPrice: 6993,
     category: 'Accessories',
     subCategory: 'Bags',
     gender: 'Unisex',
@@ -1035,7 +1035,7 @@ const sampleProducts = [
   {
     name: 'Tennis Racket Club Series',
     description: 'Perfect racket for intermediate players with excellent power and control balance.',
-    price: 95,
+    price: 7992,
     category: 'Sports',
     subCategory: 'Tennis',
     gender: 'Unisex',
@@ -1058,7 +1058,7 @@ const sampleProducts = [
   {
     name: 'Resistance Bands Set',
     description: 'Complete resistance training set with 5 bands of varying resistance levels and accessories.',
-    price: 32,
+    price: 2691,
     category: 'Sports',
     subCategory: 'Fitness',
     gender: 'Unisex',
@@ -1080,7 +1080,7 @@ const sampleProducts = [
   {
     name: 'Jump Rope Speed Pro',
     description: 'Professional speed jump rope with ball bearings for smooth rotation and adjustable length.',
-    price: 18,
+    price: 1495,
     category: 'Sports',
     subCategory: 'Fitness',
     gender: 'Unisex',
@@ -1102,7 +1102,7 @@ const sampleProducts = [
   {
     name: 'Shin Guards Pro',
     description: 'Professional football shin guards with anatomical design and reinforced protection.',
-    price: 28,
+    price: 2392,
     category: 'Sports',
     subCategory: 'Football',
     gender: 'Men',
@@ -1125,7 +1125,7 @@ const sampleProducts = [
   {
     name: 'Goalkeeper Gloves Grip Pro',
     description: 'Professional goalkeeper gloves with superior grip and finger protection technology.',
-    price: 48,
+    price: 3992,
     category: 'Sports',
     subCategory: 'Football',
     gender: 'Men',
@@ -1151,7 +1151,7 @@ const sampleProducts = [
   {
     name: 'Running Armband Phone Holder',
     description: 'Secure phone armband for running with water-resistant design and touch-screen compatible.',
-    price: 16,
+    price: 1196,
     category: 'Accessories',
     subCategory: 'Phone Holders',
     gender: 'Unisex',
@@ -1172,7 +1172,7 @@ const sampleProducts = [
   {
     name: 'Cooling Towel Sport',
     description: 'Instant cooling towel perfect for workouts, running, and outdoor activities.',
-    price: 12,
+    price: 995,
     category: 'Accessories',
     subCategory: 'Towels',
     gender: 'Unisex',
@@ -1196,8 +1196,8 @@ const sampleProducts = [
   {
     name: 'Kids Suede Classic',
     description: 'Iconic PUMA Suede Classic scaled down for kids. Premium suede with comfortable fit for all-day play.',
-    price: 45,
-    originalPrice: 55,
+    price: 3493,
+    originalPrice: 4491,
     category: 'Shoes',
     subCategory: 'Sneakers',
     gender: 'Kids',
@@ -1227,8 +1227,8 @@ const sampleProducts = [
   {
     name: 'Kids RS-X Fun',
     description: 'Bold and colorful RS-X design for kids who love to stand out. Chunky sole for comfort and style.',
-    price: 55,
-    originalPrice: 70,
+    price: 4491,
+    originalPrice: 5994,
     category: 'Shoes',
     subCategory: 'Sneakers',
     gender: 'Kids',
@@ -1256,7 +1256,7 @@ const sampleProducts = [
   {
     name: 'Kids Future Football Boots',
     description: 'Junior football boots designed for young players to develop their skills with confidence.',
-    price: 60,
+    price: 4990,
     category: 'Sports',
     subCategory: 'Football',
     gender: 'Kids',
@@ -1284,8 +1284,8 @@ const sampleProducts = [
   {
     name: 'Kids Running Shoes Velocity',
     description: 'Lightweight running shoes for active kids with cushioned support and breathable mesh.',
-    price: 50,
-    originalPrice: 65,
+    price: 3992,
+    originalPrice: 4995,
     category: 'Shoes',
     subCategory: 'Running',
     gender: 'Kids',
@@ -1314,7 +1314,7 @@ const sampleProducts = [
   {
     name: 'Kids Essential Logo T-Shirt',
     description: 'Comfortable cotton t-shirt with PUMA Cat logo. Perfect for everyday wear and play.',
-    price: 18,
+    price: 1495,
     category: 'Apparel',
     subCategory: 'T-Shirts',
     gender: 'Kids',
@@ -1343,7 +1343,7 @@ const sampleProducts = [
   {
     name: 'Kids Training Shorts Active',
     description: 'Lightweight sports shorts with moisture-wicking fabric for active kids.',
-    price: 22,
+    price: 1794,
     category: 'Apparel',
     subCategory: 'Shorts',
     gender: 'Kids',
@@ -1370,8 +1370,8 @@ const sampleProducts = [
   {
     name: 'Kids Zip Hoodie Essential',
     description: 'Cozy fleece hoodie with full zip and iconic PUMA branding. Perfect for layering.',
-    price: 40,
-    originalPrice: 50,
+    price: 3493,
+    originalPrice: 3992,
     category: 'Apparel',
     subCategory: 'Hoodies',
     gender: 'Kids',
@@ -1399,8 +1399,8 @@ const sampleProducts = [
   {
     name: 'Kids Track Jacket Retro',
     description: 'Classic track jacket with retro PUMA styling and comfortable fit for young athletes.',
-    price: 45,
-    originalPrice: 60,
+    price: 3493,
+    originalPrice: 4990,
     category: 'Apparel',
     subCategory: 'Jackets',
     gender: 'Kids',
@@ -1427,7 +1427,7 @@ const sampleProducts = [
   {
     name: 'Kids Joggers Fleece',
     description: 'Comfortable fleece joggers perfect for casual wear and light activities.',
-    price: 35,
+    price: 2990,
     category: 'Apparel',
     subCategory: 'Pants',
     gender: 'Kids',
@@ -1455,7 +1455,7 @@ const sampleProducts = [
   {
     name: 'Kids Backpack Phase',
     description: 'Durable backpack perfect for school with multiple compartments and padded straps.',
-    price: 30,
+    price: 2392,
     category: 'Accessories',
     subCategory: 'Bags',
     gender: 'Kids',
@@ -1479,7 +1479,7 @@ const sampleProducts = [
   {
     name: 'Kids Cap Essential',
     description: 'Adjustable baseball cap with PUMA branding, perfect for sunny days.',
-    price: 15,
+    price: 1196,
     category: 'Accessories',
     subCategory: 'Caps',
     gender: 'Kids',
@@ -1502,7 +1502,7 @@ const sampleProducts = [
   {
     name: 'Kids Sport Socks 3-Pack',
     description: 'Comfortable sport socks with arch support and PUMA branding. Pack of 3 pairs.',
-    price: 12,
+    price: 995,
     category: 'Accessories',
     subCategory: 'Socks',
     gender: 'Kids',
@@ -1528,7 +1528,7 @@ const sampleProducts = [
   {
     name: 'Kids Mini Football',
     description: 'Size 3 training football perfect for young players learning the game.',
-    price: 20,
+    price: 1794,
     category: 'Sports',
     subCategory: 'Football',
     gender: 'Kids',
@@ -1550,7 +1550,7 @@ const sampleProducts = [
   {
     name: 'Kids Basketball Mini',
     description: 'Youth-sized basketball perfect for developing skills and having fun.',
-    price: 22,
+    price: 1794,
     category: 'Sports',
     subCategory: 'Basketball',
     gender: 'Kids',
@@ -1571,7 +1571,7 @@ const sampleProducts = [
   {
     name: 'Kids Water Bottle Sport',
     description: 'BPA-free water bottle with fun design and easy-to-use spout for active kids.',
-    price: 12,
+    price: 995,
     category: 'Accessories',
     subCategory: 'Bottles',
     gender: 'Kids',
