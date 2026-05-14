@@ -82,7 +82,7 @@ export default function Navbar() {
                   className="absolute inset-0 text-black dark:text-white blur-[2px] opacity-40"
                   style={{ transform: 'translate(2px, 2px)' }}
                 >
-                  PUMA
+            CLOTHIFY
                 </span>
                 {/* Main text - Black to Red gradient with sharp contrast */}
                 <span 
@@ -96,7 +96,7 @@ export default function Navbar() {
                     filter: 'contrast(1.2) saturate(1.3)',
                   }}
                 >
-                  PUMA
+                 CLOTHIFY
                 </span>
                 {/* Red glow effect on hover */}
                 <span 
