@@ -1,6 +1,6 @@
-# 🐆 PUMA E-Commerce Platform
+# 🐆 CLOTHIFY E-Commerce Platform
 
-> A premium, full-stack e-commerce solution designed for PUMA sportswear, footwear, and lifestyle products. Experience seamless shopping with modern UI/UX, secure authentication, and comprehensive order management.
+> A premium, full-stack e-commerce solution designed for CLOTHIFY sportswear, footwear, and lifestyle products. Experience seamless shopping with modern UI/UX, secure authentication, and comprehensive order management.
 
 ![PUMA Logo](https://img.shields.io/badge/PUMA-Forever%20Faster-FF0000?style=for-the-badge&logo=puma&logoColor=white)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
